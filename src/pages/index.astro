@@ -1,0 +1,178 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../data/site";
+
+const photos = [
+  {
+    src: "/images/gallery/gathering.jpg",
+    alt: "Two older women smiling at an outdoor gathering, one wearing a green jacket and the other a leopard print shirt, holding cups, with other people in the background.",
+  },
+  {
+    src: "/images/gallery/kite.jpg",
+    alt: "A young girl with a backpack and jacket smiling and holding a small red kite outdoors at night, with string lights and hay bales in the background.",
+  },
+  {
+    src: "/images/gallery/cross.jpg",
+    alt: "Two people smiling in front of a wooden cross draped with purple and white cloth.",
+  },
+  {
+    src: "/images/gallery/woj.jpg",
+    alt: "Church photo from the Rosanky Baptist Church gallery (original file name woj 26.jpg).",
+  },
+  {
+    src: "/images/gallery/angels.jpg",
+    alt: "Church photo from the Rosanky Baptist Church gallery (original file name Angels.jpg).",
+  },
+  {
+    src: "/images/gallery/announcer.jpg",
+    alt: "The announcer, Bro JR, from a Rosanky Baptist Church gathering.",
+  },
+];
+---
+
+<Base title="Rosanky Baptist Church | Join Our Faith Community Today">
+  <section class="relative min-h-[70vh] bg-navy text-cream">
+    <img
+      src="/images/worship.png"
+      alt="People kneeling in prayer on the sanctuary steps during worship at Rosanky Baptist Church."
+      class="absolute inset-0 h-full w-full object-cover opacity-50"
+      width="1500"
+      height="1000"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-navy via-navy/80 to-navy/30"></div>
+    <div class="relative mx-auto flex max-w-6xl flex-col justify-end gap-8 px-4 py-16 md:min-h-[70vh] md:px-6 md:py-20">
+      <p class="text-sm font-semibold tracking-[0.28em] text-gold uppercase">Rosanky, Texas</p>
+      <h1 class="max-w-xl font-serif text-4xl leading-tight md:text-6xl">
+        The <span class="italic text-cream">Lighthouse</span> on the Hillside
+      </h1>
+      <p class="max-w-lg text-lg text-cream/90">
+        A Christ-centered, caring church family. Bible study at 9:00 AM and worship at 10:00 AM every Sunday.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="/visit" class="rounded-full bg-brick px-5 py-3 font-semibold text-paper hover:bg-brick-deep">
+          I'm new
+        </a>
+        <a
+          href={site.mapUrl}
+          class="rounded-full border border-cream/40 px-5 py-3 font-semibold hover:bg-white/10"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Get directions
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative z-10 mx-auto -mt-8 max-w-6xl px-4 md:px-6" aria-labelledby="sunday-heading">
+    <div class="grid overflow-hidden rounded-2xl bg-paper shadow-lg md:grid-cols-3">
+      <div class="bg-brick px-6 py-8 text-paper md:col-span-1">
+        <p class="text-sm font-semibold tracking-[0.2em] uppercase">Join us</p>
+        <h2 id="sunday-heading" class="mt-2 font-serif text-3xl">Sunday morning</h2>
+        <p class="mt-3 text-sm text-paper/85">Sunday hours listed on the site: 9:00 AM–11:00 AM.</p>
+      </div>
+      <div class="px-6 py-8">
+        <h3 class="font-serif text-xl">9:00 AM: Bible Study Classes</h3>
+        <p class="mt-2 text-ink-soft">
+          Check in your children for their Bible Study Classes and find one of the many Adult Bible Study classes we offer.
+        </p>
+      </div>
+      <div class="border-t border-cream-deep px-6 py-8 md:border-t-0 md:border-l">
+        <h3 class="font-serif text-xl">10:00 AM: Worship Service</h3>
+        <p class="mt-2 text-ink-soft">
+          Family Praise and Worship takes place in the main sanctuary, and then the children’s church proceeds to their classes. Nursery available.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto grid max-w-6xl items-center gap-8 px-4 py-16 md:grid-cols-2 md:px-6" aria-labelledby="derby-heading">
+    <a href={site.pinewoodForm} target="_blank" rel="noopener noreferrer">
+      <img
+        src="/images/pinewood-derby.png"
+        alt="Community Pinewood Derby invitation from Rosanky Baptist Church."
+        class="w-full rounded-2xl shadow-md"
+        width="1200"
+        height="800"
+      />
+    </a>
+    <div>
+      <p class="text-sm font-semibold tracking-[0.2em] text-brick uppercase">Featured on the church homepage</p>
+      <h2 id="derby-heading" class="mt-2 font-serif text-3xl md:text-4xl">Start your engines, Rosanky!</h2>
+      <p class="mt-4 text-lg">
+        You're invited to a community Pinewood Derby race hosted by Rosanky Baptist Church.
+      </p>
+      <ul class="mt-4 space-y-2 text-ink-soft">
+        <li>Sunday, November 15 at 5:00 PM</li>
+        <li>Trophies for Fastest Car and Most Creative Car</li>
+        <li>Free food and refreshments</li>
+      </ul>
+      <p class="mt-4">
+        You don't have to race to join the fun. Come cheer on the racers, enjoy some food, and spend time with friends and neighbors. This event is for everyone in our community.
+      </p>
+      <a
+        href={site.pinewoodForm}
+        class="mt-6 inline-block rounded-full bg-navy px-5 py-3 font-semibold text-cream hover:bg-navy-mid"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Sign up
+      </a>
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="mx-auto grid max-w-6xl gap-8 px-4 py-16 md:grid-cols-[1.2fr_1fr] md:px-6">
+      <div>
+        <h2 class="font-serif text-3xl">Get the app</h2>
+        <p class="mt-4 text-lg text-ink-soft">
+          Stay connected and get the latest content. Download “Church Center” on any app store and search “Rosanky Baptist Church” to view the calendar, give, and more.
+        </p>
+        <a
+          href={site.churchCenter}
+          class="mt-6 inline-flex items-center gap-3 rounded-full bg-pine px-5 py-3 font-semibold text-paper"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="/images/church-center.png" alt="" width="36" height="36" class="h-9 w-9" />
+          Download the app
+        </a>
+      </div>
+      <blockquote class="rounded-2xl bg-cream px-6 py-8">
+        <p class="text-sm font-semibold tracking-[0.2em] text-gold uppercase">Vision</p>
+        <p class="mt-3 font-serif text-2xl leading-snug">{site.vision}</p>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 md:px-6" aria-labelledby="life-heading">
+    <h2 id="life-heading" class="font-serif text-3xl">Life together</h2>
+    <p class="mt-2 max-w-2xl text-ink-soft">Photographs from the church site.</p>
+    <ul class="mt-8 grid grid-cols-2 gap-3 md:grid-cols-3">
+      {
+        photos.map((photo) => (
+          <li>
+            <img src={photo.src} alt={photo.alt} class="aspect-[4/3] w-full rounded-xl object-cover" width="800" height="600" loading="lazy" />
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="bg-navy text-cream">
+    <div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-12 md:flex-row md:items-center md:justify-between md:px-6">
+      <div>
+        <h2 class="font-serif text-3xl">{site.streetShort}</h2>
+        <p class="mt-2 text-cream/80">Sunday Bible study 9:00 AM · Worship 10:00 AM · {site.phoneDisplay}</p>
+      </div>
+      <a
+        href={site.mapUrl}
+        class="rounded-full bg-cream px-5 py-3 text-center font-semibold text-navy"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Open the map
+      </a>
+    </div>
+  </section>
+</Base>

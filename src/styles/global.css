@@ -1,0 +1,55 @@
+@import "tailwindcss";
+@import "@fontsource/libre-baskerville/400.css";
+@import "@fontsource/libre-baskerville/400-italic.css";
+@import "@fontsource/libre-baskerville/700.css";
+@import "@fontsource/source-sans-3/400.css";
+@import "@fontsource/source-sans-3/600.css";
+@import "@fontsource/source-sans-3/700.css";
+
+@theme {
+  --font-serif: "Libre Baskerville", Georgia, "Times New Roman", serif;
+  --font-sans: "Source Sans 3", "Segoe UI", sans-serif;
+  --color-cream: #f4efe6;
+  --color-cream-deep: #e8dfd0;
+  --color-ink: #241c18;
+  --color-ink-soft: #5c5148;
+  --color-navy: #1b2433;
+  --color-navy-mid: #2a3648;
+  --color-brick: #8d2f2c;
+  --color-brick-deep: #6e221f;
+  --color-gold: #b0893e;
+  --color-pine: #2f5d3a;
+  --color-paper: #fffdf8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-cream);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+.prose-church p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.prose-church h2 {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  margin: 2rem 0 0.75rem;
+}
+
+.prose-church h3 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  margin: 1.5rem 0 0.5rem;
+}

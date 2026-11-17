@@ -1,0 +1,112 @@
+---
+import { nav, site } from "../data/site";
+
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+function isCurrent(href: string) {
+  if (href === "/") return path === "/";
+  return path === href || path.startsWith(`${href}/`);
+}
+---
+
+<a
+  href="#main"
+  class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-paper focus:px-4 focus:py-2 focus:text-ink"
+>
+  Skip to content
+</a>
+
+<header class="bg-navy text-cream">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
+    <a href="/" class="flex shrink-0 items-center" aria-label={`${site.name} home`}>
+      <img
+        src="/images/logo.png"
+        alt=""
+        width="280"
+        height="72"
+        class="h-12 w-auto md:h-16"
+      />
+    </a>
+
+    <button
+      id="menu-toggle"
+      type="button"
+      class="inline-flex items-center gap-2 rounded-full border border-cream/30 px-3 py-2 text-sm font-semibold tracking-wide uppercase md:hidden"
+      aria-expanded="false"
+      aria-controls="site-nav"
+    >
+      <span class="sr-only">Open menu</span>
+      <svg width="22" height="16" viewBox="0 0 22 16" aria-hidden="true" fill="none">
+        <path d="M1 1.5h20M1 8h20M1 14.5h20" stroke="currentColor" stroke-width="1.6"></path>
+      </svg>
+      Menu
+    </button>
+
+    <nav id="site-nav" class="hidden items-center gap-1 md:flex" aria-label="Primary">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isCurrent(item.href) ? "page" : undefined}
+            class:list={[
+              "rounded-full px-3 py-2 text-sm font-semibold tracking-wide",
+              isCurrent(item.href) ? "bg-cream text-navy" : "text-cream/90 hover:bg-white/10",
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a
+        href={site.churchCenter}
+        class="ml-2 rounded-full bg-brick px-4 py-2 text-sm font-semibold text-paper hover:bg-brick-deep"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Members
+      </a>
+    </nav>
+  </div>
+
+  <nav id="mobile-nav" class="hidden border-t border-white/10 px-4 py-3 md:hidden" aria-label="Mobile">
+    <ul class="flex flex-col gap-1">
+      {
+        nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              aria-current={isCurrent(item.href) ? "page" : undefined}
+              class:list={[
+                "block rounded-lg px-3 py-3 text-base font-semibold",
+                isCurrent(item.href) ? "bg-cream text-navy" : "text-cream hover:bg-white/10",
+              ]}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+      <li>
+        <a
+          href={site.churchCenter}
+          class="mt-1 block rounded-lg bg-brick px-3 py-3 text-center font-semibold text-paper"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Members
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-nav");
+  toggle?.addEventListener("click", () => {
+    const open = menu?.classList.toggle("hidden") === false;
+    toggle.setAttribute("aria-expanded", String(open));
+    const label = toggle.querySelector(".sr-only");
+    if (label) label.textContent = open ? "Close menu" : "Open menu";
+  });
+</script>

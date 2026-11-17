@@ -1,0 +1,36 @@
+---
+import { site } from "../data/site";
+---
+
+<footer class="bg-navy text-cream">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:grid-cols-3 md:px-6">
+    <div>
+      <p class="font-serif text-lg">Contact us</p>
+      <p class="mt-3 text-sm leading-relaxed text-cream/80">
+        <a class="font-semibold text-cream underline-offset-2 hover:underline" href={`tel:${site.phoneTel}`}>
+          {site.phoneDisplay}
+        </a>
+        <span class="mx-2 text-cream/40">|</span>
+        <a class="hover:underline" href={site.mapUrl} target="_blank" rel="noopener noreferrer">
+          {site.streetShort}
+        </a>
+      </p>
+      <p class="mt-2 text-sm">
+        <a class="hover:underline" href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+    </div>
+    <div>
+      <p class="font-serif text-lg">Vision</p>
+      <p class="mt-3 text-sm leading-relaxed text-cream/85">{site.vision}</p>
+    </div>
+    <div class="flex flex-col gap-3 text-sm font-semibold">
+      <a class="hover:underline" href="/pray-for-me">Pray For Me</a>
+      <a class="hover:underline" href="/get-connected">Get Connected</a>
+      <a class="hover:underline" href="/contact">Contact</a>
+      <a class="hover:underline" href={site.mapUrl} target="_blank" rel="noopener noreferrer">Directions</a>
+    </div>
+  </div>
+  <div class="border-t border-white/10 px-4 py-4 text-center text-xs text-cream/60">
+    © {new Date().getFullYear()} {site.name}. All Rights Reserved.
+  </div>
+</footer>
