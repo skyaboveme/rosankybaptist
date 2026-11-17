@@ -30,6 +30,8 @@ This is a static site. On Cloudflare Pages:
 - Build command: `npm run build`
 - Output directory: `dist`
 
+The repository is also connected to Cloudflare Workers Builds. Preview builds run `npx wrangler preview` with no separate build command, so `prepare` runs `astro build` during `npm ci` and `wrangler.jsonc` serves `dist` as static assets, including `404.html` and `public/_redirects`.
+
 `public/_redirects` sends `/home` to `/` and keeps a few older Trumpet category URLs working. Astro also emits an HTML redirect for `/home`.
 
 Set the production site URL in `astro.config.mjs` (`site`) if the domain changes. Canonical links, Open Graph tags, the sitemap, and Church / LocalBusiness JSON-LD use `https://www.rosankybc.org`.
