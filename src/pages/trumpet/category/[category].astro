@@ -1,0 +1,39 @@
+---
+import { allPosts, formatDate, termHref } from "../../../lib/trumpet";
+import Base from "../../../layouts/Base.astro";
+import PageHero from "../../../components/PageHero.astro";
+
+export async function getStaticPaths() {
+  const posts = await allPosts();
+  const categories = [...new Set(posts.flatMap((post) => post.data.categories))];
+  return categories.map((category) => ({
+    params: { category },
+    props: { category },
+  }));
+}
+
+const { category } = Astro.props;
+const posts = (await allPosts()).filter((post) => post.data.categories.includes(category));
+---
+
+<Base title={`${category} — Trumpet News`} description={`Trumpet News posts in the ${category} category.`}>
+  <PageHero eyebrow="Trumpet News" title={category} lede="Posts filed in this category on the current church site." />
+  <div class="mx-auto max-w-3xl px-4 py-12 md:px-6">
+    <ul class="space-y-6">
+      {
+        posts.map((post) => (
+          <li>
+            <a href={`/trumpet/${post.id}`} class="block rounded-2xl bg-paper p-5 ring-1 ring-cream-deep hover:bg-cream">
+              <p class="text-sm font-semibold text-brick">{formatDate(post.data.date)}</p>
+              <h2 class="mt-1 font-serif text-2xl">{post.data.title}</h2>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="mt-8">
+      <a href="/trumpet" class="font-semibold text-brick hover:underline">All Trumpet News</a>
+    </p>
+    <p class="sr-only">{termHref("category", category)}</p>
+  </div>
+</Base>

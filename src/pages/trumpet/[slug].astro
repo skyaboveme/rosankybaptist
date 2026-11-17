@@ -1,0 +1,104 @@
+---
+import { render } from "astro:content";
+import { allPosts, formatDate, galleryImages, termHref } from "../../lib/trumpet";
+import Base from "../../layouts/Base.astro";
+import Gallery from "../../components/Gallery.astro";
+import TodoNote from "../../components/TodoNote.astro";
+
+export async function getStaticPaths() {
+  const posts = await allPosts();
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const images = galleryImages(post);
+const posts = await allPosts();
+const index = posts.findIndex((item) => item.id === post.id);
+const newer = index > 0 ? posts[index - 1] : undefined;
+const older = index < posts.length - 1 ? posts[index + 1] : undefined;
+---
+
+<Base title={post.data.title} description={post.data.description} image={post.data.cover}>
+  <article class="mx-auto max-w-3xl px-4 py-12 md:px-6">
+    <p class="text-sm font-semibold tracking-[0.16em] text-brick uppercase">
+      <a href="/trumpet" class="hover:underline">Trumpet News</a>
+    </p>
+    <h1 class="mt-3 font-serif text-4xl leading-tight">{post.data.title}</h1>
+    <p class="mt-3 text-ink-soft">
+      <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+      <span> · Written by Mission Design Services</span>
+    </p>
+    {
+      (post.data.categories.length > 0 || post.data.tags.length > 0) && (
+        <ul class="mt-4 flex flex-wrap gap-2">
+          {post.data.categories.map((category) => (
+            <li>
+              <a href={termHref("category", category)} class="rounded-full bg-cream-deep px-3 py-1 text-sm font-semibold">
+                {category}
+              </a>
+            </li>
+          ))}
+          {post.data.tags.map((tag) => (
+            <li>
+              <a href={termHref("tag", tag)} class="rounded-full bg-paper px-3 py-1 text-sm ring-1 ring-cream-deep">
+                {tag}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    <div class="prose-church mt-8 text-lg">
+      <Content />
+    </div>
+
+    {
+      post.data.pdf && post.data.pdfLabel && (
+        <p class="mt-6">
+          <a
+            href={post.data.pdf}
+            class="inline-block rounded-full bg-brick px-5 py-3 font-semibold text-paper hover:bg-brick-deep"
+          >
+            {post.data.pdfLabel}
+          </a>
+        </p>
+      )
+    }
+
+    {
+      post.data.pdfMissing && (
+        <div class="mt-6">
+          <TodoNote>
+            <p>{post.data.pdfMissing}</p>
+          </TodoNote>
+        </div>
+      )
+    }
+
+    {images.length > 0 && <div class="mt-8"><Gallery images={images} label={post.data.title} /></div>}
+
+    <nav class="mt-12 grid gap-4 border-t border-cream-deep pt-6 sm:grid-cols-2" aria-label="More news">
+      {
+        newer && (
+          <a href={`/trumpet/${newer.id}`} class="rounded-xl bg-paper p-4 ring-1 ring-cream-deep">
+            <span class="text-xs font-semibold tracking-wide text-ink-soft uppercase">Newer</span>
+            <span class="mt-1 block font-serif text-lg">{newer.data.title}</span>
+          </a>
+        )
+      }
+      {
+        older && (
+          <a href={`/trumpet/${older.id}`} class="rounded-xl bg-paper p-4 ring-1 ring-cream-deep sm:text-right">
+            <span class="text-xs font-semibold tracking-wide text-ink-soft uppercase">Older</span>
+            <span class="mt-1 block font-serif text-lg">{older.data.title}</span>
+          </a>
+        )
+      }
+    </nav>
+  </article>
+</Base>

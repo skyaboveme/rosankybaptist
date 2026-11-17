@@ -1,0 +1,74 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import TodoNote from "../components/TodoNote.astro";
+import { site } from "../data/site";
+---
+
+<Base
+  title="Pray For Me"
+  description="Submit a prayer request to Rosanky Baptist Church."
+>
+  <PageHero title="Please submit prayer requests here" lede="Our church staff prays for the requests entrusted to the church." />
+  <section class="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:grid-cols-2 md:px-6">
+    <div>
+      <p class="text-ink-soft">
+        The footer on the current site links “Pray For Me” to a Church Center form. The /pray-for-me page itself asks for Name, Phone, Email, and “How May We Pray For You?”
+      </p>
+      <a
+        href={site.prayerForm}
+        class="mt-6 inline-block rounded-full bg-brick px-5 py-3 font-semibold text-paper"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Open the prayer form
+      </a>
+      <form id="prayer-form" class="mt-8 space-y-4">
+        <div>
+          <label class="block text-sm font-semibold" for="name">Name</label>
+          <input id="name" name="name" required autocomplete="name" class="mt-1 w-full rounded-lg border border-cream-deep bg-paper px-3 py-2" />
+        </div>
+        <div>
+          <label class="block text-sm font-semibold" for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" required autocomplete="tel" class="mt-1 w-full rounded-lg border border-cream-deep bg-paper px-3 py-2" />
+        </div>
+        <div>
+          <label class="block text-sm font-semibold" for="email">Email</label>
+          <input id="email" name="email" type="email" required autocomplete="email" class="mt-1 w-full rounded-lg border border-cream-deep bg-paper px-3 py-2" />
+        </div>
+        <div>
+          <label class="block text-sm font-semibold" for="request">How May We Pray For You?</label>
+          <textarea id="request" name="request" required rows="6" class="mt-1 w-full rounded-lg border border-cream-deep bg-paper px-3 py-2"></textarea>
+        </div>
+        <button type="submit" class="rounded-full bg-navy px-5 py-3 font-semibold text-cream">Submit</button>
+      </form>
+      <div id="prayer-thanks" class="mt-6 hidden rounded-2xl bg-paper p-5" role="status">
+        <p>Thank you for entrusting us to pray for you during this time.</p>
+        <p class="mt-2">Our church staff is praying for you. Please let us know how else we can support you during this time.</p>
+      </div>
+    </div>
+    <TodoNote title="TODO">
+      <p>
+        The on-site prayer form submitted to Squarespace with a captcha. The button above opens the live Church Center form. The fields here open an email to {site.email} until a form service is connected. The success message is the text the old form showed after a submission.
+      </p>
+    </TodoNote>
+  </section>
+</Base>
+
+<script define:vars={{ email: site.email }}>
+  const form = document.getElementById("prayer-form");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const body = [
+      `Name: ${data.get("name") || ""}`,
+      `Phone: ${data.get("phone") || ""}`,
+      `Email: ${data.get("email") || ""}`,
+      "",
+      "How May We Pray For You?",
+      String(data.get("request") || ""),
+    ].join("\n");
+    document.getElementById("prayer-thanks")?.classList.remove("hidden");
+    window.location.href = `mailto:${email}?subject=${encodeURIComponent("Prayer request")}&body=${encodeURIComponent(body)}`;
+  });
+</script>

@@ -1,0 +1,62 @@
+---
+import { allPosts, formatDate, termHref } from "../../lib/trumpet";
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+
+const posts = await allPosts();
+const categories = [...new Set(posts.flatMap((post) => post.data.categories))].sort();
+---
+
+<Base
+  title="Trumpet News"
+  description="Trumpet News from Rosanky Baptist Church: newsletters, events, and stories from the church family."
+>
+  <PageHero
+    eyebrow="Newsletter"
+    title="Trumpet News"
+    lede="Newsletters and stories published on the church site. Every post on the current site is bylined Mission Design Services."
+  />
+  <div class="mx-auto max-w-6xl px-4 py-12 md:px-6">
+    {
+      categories.length > 0 && (
+        <ul class="mb-10 flex flex-wrap gap-2">
+          {categories.map((category) => (
+            <li>
+              <a
+                href={termHref("category", category)}
+                class="rounded-full bg-paper px-3 py-1 text-sm font-semibold text-navy ring-1 ring-cream-deep hover:bg-cream-deep"
+              >
+                {category}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+    <ul class="grid gap-8 md:grid-cols-2">
+      {
+        posts.map((post) => (
+          <li>
+            <a href={`/trumpet/${post.id}`} class="group block overflow-hidden rounded-2xl bg-paper shadow-sm ring-1 ring-cream-deep">
+              {post.data.cover && (
+                <img
+                  src={post.data.cover}
+                  alt=""
+                  class="aspect-[16/10] w-full object-cover object-top"
+                  width="800"
+                  height="500"
+                  loading="lazy"
+                />
+              )}
+              <div class="px-5 py-5">
+                <p class="text-sm font-semibold text-brick">{formatDate(post.data.date)}</p>
+                <h2 class="mt-1 font-serif text-2xl group-hover:underline">{post.data.title}</h2>
+                <p class="mt-2 text-ink-soft">{post.data.description}</p>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Base>

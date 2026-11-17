@@ -42,6 +42,13 @@ body {
   line-height: 1.7;
 }
 
+.prose-church a {
+  color: var(--color-brick);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .prose-church h2 {
   font-family: var(--font-serif);
   font-size: 1.75rem;

@@ -1,0 +1,24 @@
+---
+interface Props {
+  images: string[];
+  label: string;
+}
+const { images, label } = Astro.props;
+---
+
+<ul class="grid gap-4 sm:grid-cols-2">
+  {
+    images.map((src, index) => (
+      <li class:list={[index === 0 ? "sm:col-span-2" : ""]}>
+        <img
+          src={src}
+          alt={`${label}, image ${index + 1} of ${images.length}`}
+          class="w-full rounded-xl bg-cream-deep object-contain"
+          loading="lazy"
+          width="1200"
+          height="1600"
+        />
+      </li>
+    ))
+  }
+</ul>

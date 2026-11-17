@@ -1,0 +1,198 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import { site } from "../data/site";
+
+const beliefs = [
+  "We believe Jesus’ life, death, and resurrection are essential to restore and redeem our fallen world.",
+  "We believe in the virgin birth of Jesus Christ, God’s Son.",
+  "We believe in the verbal inspiration and authority of the Scriptures.",
+  "We believe in the Holy Trinity; in one true God manifested in the Father, the Son, and the Holy Spirit.",
+  "We believe that salvation is “by grace through faith”, plus nothing and minus nothing.",
+];
+
+const journey = [
+  {
+    title: "God’s Design",
+    body: [
+      "We see the beauty, purpose, and evidence of God’s love for us in the design around us.",
+      "The Bible tells us that God originally planned a world that worked perfectly—where everything and everyone fit together in harmony.",
+      "God made each of us with a purpose—to worship Him and walk with Him.",
+    ],
+    quote: "“God saw all that He had made, and it was very good.”",
+    cite: "Genesis 1:3",
+  },
+  {
+    title: "Sin",
+    body: [
+      "Life doesn’t work when we ignore God, sin separates us from Holy God and His original design for our lives.",
+      "When we selfishly insist on doing things our own way. The Word of God calls this sin. We all sin and distort the original design.",
+      "The consequence of our sin is separation from God—in this life and for all eternity.",
+    ],
+    quote: "“All have sinned and fall short of the glory of God.”",
+    cite: "Romans 3:23",
+  },
+  {
+    title: "Brokenness",
+    body: [
+      "Sin leads to a place of brokenness and despair. We see this all around us and in our own lives as well.",
+      "When we realize life is not working, we begin to look for an answer and a way out. We tend to go in many directions trying different things to figure it out on our own.",
+      "Brokenness leads to a place of realizing a need for something greater. God.",
+    ],
+    quote: "“They exchanged the truth of God for a lie and worshiped and served something created instead of the Creator.\"",
+    cite: "Romans 1:25",
+  },
+  {
+    title: "Gospel",
+    body: [
+      "At this point, we need a remedy—some good news.",
+      "Because of His love, God never intended for us to broken, and has not left us in our brokenness. God has given us a choice. Jesus, God in human flesh, came to us and lived perfectly according to God’s design. The design that was meant for us.",
+      "Jesus came to our rescue—to do for us what we could not do for ourselves. He took our sin and shame to the cross, paying the penalty of our sin by His death. Jesus provided the only way for us to be rescued and restored to have a relationship with God. Jesus was then raised from the dead in three days, conquering death forever.",
+    ],
+    quote: "“For God loved the world in this way: He gave His One and only Son.”",
+    cite: "John 3:16",
+  },
+  {
+    title: "Repent & Believe",
+    body: [
+      "Simply hearing this Good News is not enough.",
+      "We must admit our sinful brokenness (repent), stop trusting in ourselves and admit to God that we are sinners. We don’t have the power to escape this brokenness on our own. We need to be rescued.",
+      "We must ask God to forgive us—turning from sin to trust only in Jesus. This is what it means to repent (confess of sins and ask for forgiveness.) and believe.",
+      "Believing that Jesus is God's only son and accepting God's forgiveness from sin. We receive a new life through Jesus and God turns our lives in a new direction. We become one with God.",
+    ],
+    quote: "“Repent and believe in the good news.”",
+    cite: "Mark 1:15",
+  },
+  {
+    title: "Recover & Pursue",
+    body: [
+      "When God restores our relationship to Him, we begin to discover meaning and purpose. Now we can pursue God’s design in all areas of our lives.",
+      "Even when we fall, we understand God’s pathway to be restored.",
+      "God’s Spirit empowers us to pursue His design and assures us of His presence in this life and for all eternity.",
+    ],
+    quote: "“For it is God who is working in you, enabling you both to desire and to work out His good purpose.”",
+    cite: "Philippians 2:13",
+  },
+];
+---
+
+<Base
+  title="I'm New | Join Our Faith Community Today"
+  description="Discover Rosanky Baptist Church. Join us for worship, Bible studies, and fellowship. Get connected and grow in faith with our welcoming community."
+>
+  <PageHero title="Welcome to Rosanky Baptist Church" lede="We are a Christ Centered, Caring Church Family." />
+
+  <section class="mx-auto max-w-6xl px-4 py-14 md:px-6">
+    <h2 class="font-serif text-3xl">When praying about a church</h2>
+    <div class="mt-8 grid gap-6 md:grid-cols-3">
+      <article class="rounded-2xl bg-paper p-6 shadow-sm">
+        <h3 class="font-serif text-xl text-brick">You need a place to be discipled</h3>
+        <p class="mt-3 text-ink-soft">
+          Discern if the Pastor and people have a heart to include and teach others. Ask how the church facilitates this: by a strong pulpit ministry and sound teaching of the Bible.
+        </p>
+      </article>
+      <article class="rounded-2xl bg-paper p-6 shadow-sm">
+        <h3 class="font-serif text-xl text-brick">You need a place to be challenged</h3>
+        <p class="mt-3 text-ink-soft">
+          Seek a Pastor and People who have a passion for God and compassion for others. Ask about the emphasis put on the home and reaching the lost.
+        </p>
+      </article>
+      <article class="rounded-2xl bg-paper p-6 shadow-sm">
+        <h3 class="font-serif text-xl text-brick">You need a place to be used</h3>
+        <p class="mt-3 text-ink-soft">
+          Look for a Pastor and People with God’s vision for what He wants to do through His Church. Ask God to lead you to the right place of service that He has chosen for you.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="bg-paper" aria-labelledby="sunday-heading">
+    <div class="mx-auto grid max-w-6xl items-center gap-8 px-4 py-14 md:grid-cols-2 md:px-6">
+      <div>
+        <h2 id="sunday-heading" class="font-serif text-3xl">Join us Sunday morning</h2>
+        <h3 class="mt-6 font-serif text-xl">9:00 AM: Bible Study Classes</h3>
+        <p class="mt-2 text-ink-soft">
+          Check in your children for their Bible Study Classes and find one of the many Adult Bible Study classes we offer.
+        </p>
+        <h3 class="mt-6 font-serif text-xl">10:00 AM: Worship Service</h3>
+        <p class="mt-2 text-ink-soft">
+          Family Praise and Worship takes place in the main sanctuary, and then the children’s church proceeds to their classes. Nursery available.
+        </p>
+        <p class="mt-4 text-sm text-ink-soft">Sunday hours listed on the site: 9:00 AM–11:00 AM.</p>
+      </div>
+      <figure>
+        <img
+          src="/images/campus-map.png"
+          alt="Aerial campus map on FM 535 labeling the fellowship hall, the sanctuary with Bible study and the church office, and the neighboring Rosanky Christian Academy building."
+          class="w-full rounded-2xl"
+          width="1200"
+          height="900"
+        />
+        <figcaption class="mt-2 text-sm text-ink-soft">
+          Campus map from the I’m New page. The map labels the fellowship hall and the worship sanctuary, Bible study, and church office.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-14 md:px-6">
+    <h2 class="font-serif text-3xl">RBC Mission</h2>
+    <p class="mt-4 max-w-3xl text-xl leading-relaxed">{site.mission}</p>
+
+    <h2 class="mt-12 font-serif text-3xl">Core beliefs</h2>
+    <ul class="mt-6 max-w-3xl space-y-3">
+      {beliefs.map((belief) => <li class="rounded-xl bg-paper px-5 py-4">{belief}</li>)}
+    </ul>
+  </section>
+
+  <section class="bg-navy text-cream">
+    <div class="mx-auto max-w-3xl px-4 py-14 md:px-6">
+      <h2 class="font-serif text-3xl">Begin your faith journey</h2>
+      <div class="mt-4 space-y-4 text-lg leading-relaxed text-cream/90">
+        <p>
+          The world is seeking meaning, hope and a place to belong. We believe that there is one hope for this life and the life to come through the saving grace of Jesus. The best way to know Jesus is through God’s word, the Bible. The word of God shows us our fractured relationship with a holy God and that, through Jesus, that relationship can be restored. Our hope and prayer, for you is to know the transforming power of Jesus and His love for you.
+        </p>
+        <blockquote class="border-l-4 border-gold pl-4 font-serif text-2xl text-cream">
+          "Herein is love, not that we loved God, but that he loved us."
+          <cite class="mt-2 block text-base not-italic text-gold">1 John 4:10</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-4 py-14 md:px-6">
+    {
+      journey.map((step) => (
+        <article class="border-b border-cream-deep py-8">
+          <h2 class="font-serif text-3xl">{step.title}</h2>
+          {step.body.map((paragraph) => (
+            <p class="mt-3 leading-relaxed text-ink-soft">{paragraph}</p>
+          ))}
+          <blockquote class="mt-4 font-serif text-xl">
+            {step.quote}
+            <cite class="mt-1 block text-base not-italic text-brick">{step.cite}</cite>
+          </blockquote>
+        </article>
+      ))
+    }
+  </section>
+
+  <section class="bg-paper">
+    <div class="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-12 md:flex-row md:items-center md:justify-between md:px-6">
+      <div>
+        <h2 class="font-serif text-2xl">Get the app</h2>
+        <p class="mt-2 max-w-xl text-ink-soft">
+          Stay connected and get the latest content. Download “Church Center” on any app store and search “Rosanky Baptist Church” to view the calendar, give, and more.
+        </p>
+      </div>
+      <a
+        href={site.churchCenter}
+        class="rounded-full bg-pine px-5 py-3 text-center font-semibold text-paper"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Download the app
+      </a>
+    </div>
+  </section>
+</Base>
