@@ -30,29 +30,29 @@ const ways = [
 <Base
   title="Give | Support Community Growth Today"
   description="Learn how to give at Rosanky Baptist Church through onsite or online donations and join us in spreading the Gospel in Rosanky, TX."
+  leaf="Give"
 >
   <PageHero
     title="Give"
     lede="Learn how to give at Rosanky Baptist Church through onsite or online donations."
   />
-  <section class="mx-auto grid max-w-6xl gap-6 px-4 py-14 md:grid-cols-3 md:px-6">
+  <section class="page-wrap" style="padding-top:1.5rem">
     {
       ways.map((way) => (
-        <article class="flex flex-col rounded-2xl bg-paper p-6 shadow-sm">
-          <img src={way.image} alt={way.alt} class="h-28 w-28 object-contain" width="200" height="200" />
-          <h2 class="mt-4 font-serif text-2xl">{way.title}</h2>
-          <p class="mt-3 flex-1 text-ink-soft">{way.body}</p>
-          {way.extra && <p class="mt-3 font-semibold">{way.extra}</p>}
-          {way.href && (
-            <a
-              href={way.href}
-              class="mt-5 inline-block rounded-full bg-brick px-4 py-2 text-center font-semibold text-paper"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Give online
-            </a>
-          )}
+        <article class="give-row">
+          <img src={way.image} alt={way.alt} width="200" height="200" />
+          <div>
+            <h2>{way.title}</h2>
+            <p class="mt-2 ink-soft">{way.body}</p>
+            {way.extra && <p class="mt-2 font-semibold">{way.extra}</p>}
+            {way.href && (
+              <p class="mt-3">
+                <a class="link-arrow" href={way.href} target="_blank" rel="noopener noreferrer">
+                  Give online
+                </a>
+              </p>
+            )}
+          </div>
         </article>
       ))
     }

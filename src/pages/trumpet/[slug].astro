@@ -22,7 +22,14 @@ const newer = index > 0 ? posts[index - 1] : undefined;
 const older = index < posts.length - 1 ? posts[index + 1] : undefined;
 ---
 
-<Base title={post.data.title} description={post.data.description} image={post.data.cover}>
+<Base
+  title={post.data.title}
+  description={post.data.description}
+  image={post.data.cover}
+  pageType="BlogPosting"
+  published={post.data.date}
+  leaf={post.data.title}
+>
   <article class="mx-auto max-w-3xl px-4 py-12 md:px-6">
     <p class="text-sm font-semibold tracking-[0.16em] text-brick uppercase">
       <a href="/trumpet" class="hover:underline">Trumpet News</a>

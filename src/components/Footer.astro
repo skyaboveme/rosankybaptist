@@ -2,35 +2,26 @@
 import { site } from "../data/site";
 ---
 
-<footer class="bg-navy text-cream">
-  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:grid-cols-3 md:px-6">
-    <div>
-      <p class="font-serif text-lg">Contact us</p>
-      <p class="mt-3 text-sm leading-relaxed text-cream/80">
-        <a class="font-semibold text-cream underline-offset-2 hover:underline" href={`tel:${site.phoneTel}`}>
-          {site.phoneDisplay}
-        </a>
-        <span class="mx-2 text-cream/40">|</span>
-        <a class="hover:underline" href={site.mapUrl} target="_blank" rel="noopener noreferrer">
-          {site.streetShort}
-        </a>
-      </p>
-      <p class="mt-2 text-sm">
-        <a class="hover:underline" href={`mailto:${site.email}`}>{site.email}</a>
-      </p>
-    </div>
-    <div>
-      <p class="font-serif text-lg">Vision</p>
-      <p class="mt-3 text-sm leading-relaxed text-cream/85">{site.vision}</p>
-    </div>
-    <div class="flex flex-col gap-3 text-sm font-semibold">
-      <a class="hover:underline" href="/pray-for-me">Pray For Me</a>
-      <a class="hover:underline" href="/get-connected">Get Connected</a>
-      <a class="hover:underline" href="/contact">Contact</a>
-      <a class="hover:underline" href={site.mapUrl} target="_blank" rel="noopener noreferrer">Directions</a>
-    </div>
+<footer class="site-footer">
+  <div class="vision">
+    <p class="kicker" style="color:#e7c98a; margin-bottom:0.7rem;">Vision</p>
+    <p>{site.vision}</p>
   </div>
-  <div class="border-t border-white/10 px-4 py-4 text-center text-xs text-cream/60">
-    © {new Date().getFullYear()} {site.name}. All Rights Reserved.
+  <div class="footer-row">
+    <p>
+      <a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a><br />
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+    </p>
+    <p>
+      <a href={site.mapUrl} target="_blank" rel="noopener noreferrer">
+        {site.streetLine1}<br />{site.city}, {site.region} {site.postalCode}
+      </a>
+    </p>
+    <p>
+      <a href="/pray-for-me">Pray For Me</a><br />
+      <a href="/get-connected">Get Connected</a><br />
+      <a href="/contact">Contact</a>
+    </p>
   </div>
+  <p class="legal">© {new Date().getFullYear()} {site.name}. All Rights Reserved.</p>
 </footer>
