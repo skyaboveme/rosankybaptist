@@ -30,7 +30,8 @@ const older = index < posts.length - 1 ? posts[index + 1] : undefined;
   published={post.data.date}
   leaf={post.data.title}
 >
-  <article class="mx-auto max-w-3xl px-4 py-12 md:px-6">
+  <article class="story">
+    <div class="story-copy">
     <p class="text-sm font-semibold tracking-[0.16em] text-brick uppercase">
       <a href="/trumpet" class="hover:underline">Trumpet News</a>
     </p>
@@ -87,8 +88,15 @@ const older = index < posts.length - 1 ? posts[index + 1] : undefined;
       )
     }
 
-    {images.length > 0 && <div class="mt-8"><Gallery images={images} label={post.data.title} /></div>}
+    </div>
 
+    {images.length > 0 && (
+      <div class="story-gallery">
+        <Gallery images={images} label={post.data.title} />
+      </div>
+    )}
+
+    <div class="story-copy">
     <nav class="mt-12 grid gap-4 border-t border-cream-deep pt-6 sm:grid-cols-2" aria-label="More news">
       {
         newer && (
@@ -107,5 +115,6 @@ const older = index < posts.length - 1 ? posts[index + 1] : undefined;
         )
       }
     </nav>
+    </div>
   </article>
 </Base>
