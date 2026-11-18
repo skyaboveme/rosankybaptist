@@ -31,8 +31,9 @@ export const site = {
 
 export const nav = [
   { href: "/", label: "Home" },
-  { href: "/visit", label: "I'm New & Beliefs" },
-  { href: "/give", label: "Give" },
-  { href: "/calendar", label: "Calendar" },
-  { href: "/trumpet", label: "Trumpet News" },
+  { href: "/visit", label: "Worship" },
+  { href: site.giveOnline, label: "Give", external: true },
+  { href: "/calendar", label: "Attend" },
+  { href: "/trumpet", label: "News" },
+  { href: site.churchCenter, label: "Members", external: true },
 ] as const;
