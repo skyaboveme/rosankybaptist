@@ -3,22 +3,324 @@ interface Props {
   images: string[];
   label: string;
 }
+
 const { images, label } = Astro.props;
+const multiple = images.length > 1;
 ---
 
-<ul class="grid gap-4 sm:grid-cols-2">
-  {
-    images.map((src, index) => (
-      <li class:list={[index === 0 ? "sm:col-span-2" : ""]}>
-        <img
-          src={src}
-          alt={`${label}, image ${index + 1} of ${images.length}`}
-          class="w-full rounded-xl bg-cream-deep object-contain"
-          loading="lazy"
-          width="1200"
-          height="1600"
-        />
-      </li>
-    ))
+<section
+  class="page-flipper"
+  aria-roledescription={multiple ? "carousel" : undefined}
+  aria-label={multiple ? `${label} images` : undefined}
+  data-page-flipper={multiple ? "" : undefined}
+>
+  <div class="page-flipper-frame">
+    {
+      multiple && (
+        <div class="page-flipper-bar">
+          <button type="button" data-flip-prev aria-label="Previous image" disabled>
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+              <path
+                d="M14.5 5.5 8 12l6.5 6.5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+          <p class="page-flipper-count" data-flip-count aria-live="polite">
+            1 of {images.length}
+          </p>
+          <button type="button" data-flip-next aria-label="Next image">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+              <path
+                d="M9.5 5.5 16 12l-6.5 6.5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+      )
+    }
+    {multiple && <p class="page-flipper-hint">Use the arrows or swipe sideways to move between images.</p>}
+    <div class="page-flipper-viewport" tabindex={multiple ? 0 : undefined}>
+      <div class="page-flipper-track">
+        {
+          images.map((src, index) => (
+            <div
+              class="page-flipper-slide"
+              role={multiple ? "group" : undefined}
+              aria-roledescription={multiple ? "slide" : undefined}
+              aria-label={multiple ? `Image ${index + 1} of ${images.length}` : undefined}
+            >
+              <img
+                src={src}
+                alt={`${label}, image ${index + 1} of ${images.length}`}
+                class="page-flipper-image"
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+                draggable="false"
+                fetchpriority={index === 0 ? "high" : undefined}
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  function bootFlippers() {
+    document.querySelectorAll("[data-page-flipper]").forEach((root) => {
+      if (!(root instanceof HTMLElement) || root.dataset.flipBound === "true") return;
+      root.dataset.flipBound = "true";
+      setupFlipper(root);
+    });
   }
-</ul>
+
+  function setupFlipper(root) {
+    const frame = root.querySelector(".page-flipper-frame");
+    const viewport = root.querySelector(".page-flipper-viewport");
+    const track = root.querySelector(".page-flipper-track");
+    const prev = root.querySelector("[data-flip-prev]");
+    const next = root.querySelector("[data-flip-next]");
+    const count = root.querySelector("[data-flip-count]");
+    if (
+      !(frame instanceof HTMLElement) ||
+      !(viewport instanceof HTMLElement) ||
+      !(track instanceof HTMLElement) ||
+      !(prev instanceof HTMLButtonElement) ||
+      !(next instanceof HTMLButtonElement) ||
+      !(count instanceof HTMLElement)
+    ) {
+      return;
+    }
+
+    const slides = [...track.children].filter((slide) => slide instanceof HTMLElement);
+    const images = slides.map((slide) => slide.querySelector("img")).filter((img) => img instanceof HTMLImageElement);
+    if (slides.length < 2 || images.length !== slides.length) return;
+
+    const abort = new AbortController();
+    const { signal } = abort;
+    let current = 0;
+    let dragging = false;
+    let pointerId = null;
+    let startX = 0;
+    let startY = 0;
+    let axis = "";
+    let lastWidth = -1;
+
+    function stageWidth() {
+      const gallery = root.parentElement;
+      return gallery instanceof HTMLElement ? gallery.clientWidth : root.clientWidth;
+    }
+
+    function frameWidth() {
+      const available = stageWidth();
+      const natural = images.reduce((max, img) => Math.max(max, img.naturalWidth || 0), 0);
+      return natural > 0 ? Math.min(available, natural) : available;
+    }
+
+    function frameHeight(index, width) {
+      const img = images[index];
+      if (img.naturalWidth > 0) return Math.round(width * (img.naturalHeight / img.naturalWidth));
+      return img.getBoundingClientRect().height;
+    }
+
+    function placeBar() {
+      const header = document.querySelector(".masthead");
+      const height = header instanceof HTMLElement ? Math.ceil(header.getBoundingClientRect().height) : 80;
+      root.style.setProperty("--flip-stick", `${height + 12}px`);
+    }
+
+    function paint() {
+      count.textContent = `${current + 1} of ${slides.length}`;
+      prev.disabled = current === 0;
+      next.disabled = current === slides.length - 1;
+      slides.forEach((slide, index) => {
+        const active = index === current;
+        slide.setAttribute("aria-hidden", active ? "false" : "true");
+      });
+      images[current].loading = "eager";
+      if (images[current + 1]) images[current + 1].loading = "eager";
+      if (images[current - 1]) images[current - 1].loading = "eager";
+    }
+
+    function apply(animate) {
+      const motion = animate && !reducedMotion.matches;
+      frame.style.width = `${Math.round(frameWidth())}px`;
+      const width = viewport.clientWidth;
+      slides.forEach((slide) => {
+        slide.style.flexBasis = `${width}px`;
+      });
+      const height = frameHeight(current, width);
+      root.classList.toggle("is-instant", !motion);
+      if (motion) void viewport.offsetWidth;
+      if (height > 0) viewport.style.height = `${height}px`;
+      track.style.transition = motion ? "transform 0.35s ease" : "none";
+      track.style.transform = `translate3d(${-current * width}px, 0, 0)`;
+      paint();
+    }
+
+    function go(nextIndex, reveal) {
+      const clamped = Math.max(0, Math.min(slides.length - 1, nextIndex));
+      const changed = clamped !== current;
+      current = clamped;
+      apply(true);
+      if (changed && reveal) {
+        const header = document.querySelector(".masthead");
+        const offset = (header instanceof HTMLElement ? header.getBoundingClientRect().height : 0) + 12;
+        const top = root.getBoundingClientRect().top;
+        if (top < offset) {
+          window.scrollTo({
+            top: window.scrollY + top - offset,
+            behavior: reducedMotion.matches ? "auto" : "smooth",
+          });
+        }
+      }
+    }
+
+    function dragTo(dx) {
+      const width = viewport.clientWidth || Math.round(frameWidth());
+      let shift = dx;
+      if ((current === 0 && shift > 0) || (current === slides.length - 1 && shift < 0)) shift *= 0.35;
+      track.style.transition = "none";
+      track.style.transform = `translate3d(${-current * width + shift}px, 0, 0)`;
+    }
+
+    function finishDrag(dx) {
+      root.classList.remove("is-dragging");
+      const width = viewport.clientWidth || 1;
+      const passed = Math.abs(dx) > Math.min(72, width * 0.16);
+      if (axis === "x" && passed) go(current + (dx < 0 ? 1 : -1), false);
+      else apply(true);
+      dragging = false;
+      pointerId = null;
+      axis = "";
+    }
+
+    prev.addEventListener("click", () => go(current - 1, true), { signal });
+    next.addEventListener("click", () => go(current + 1, true), { signal });
+
+    root.addEventListener(
+      "keydown",
+      (event) => {
+        if (event.altKey || event.ctrlKey || event.metaKey) return;
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          go(current + 1, true);
+        } else if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          go(current - 1, true);
+        } else if (event.key === "Home") {
+          event.preventDefault();
+          go(0, true);
+        } else if (event.key === "End") {
+          event.preventDefault();
+          go(slides.length - 1, true);
+        }
+      },
+      { signal },
+    );
+
+    viewport.addEventListener(
+      "pointerdown",
+      (event) => {
+        if (event.button !== 0 || dragging) return;
+        dragging = true;
+        pointerId = event.pointerId;
+        startX = event.clientX;
+        startY = event.clientY;
+        axis = "";
+      },
+      { signal },
+    );
+
+    viewport.addEventListener(
+      "pointermove",
+      (event) => {
+        if (!dragging || event.pointerId !== pointerId) return;
+        const dx = event.clientX - startX;
+        const dy = event.clientY - startY;
+        if (!axis) {
+          if (Math.hypot(dx, dy) < 8) return;
+          axis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+          if (axis === "y") {
+            dragging = false;
+            pointerId = null;
+            return;
+          }
+          root.classList.add("is-dragging");
+          viewport.setPointerCapture(event.pointerId);
+        }
+        if (axis !== "x") return;
+        event.preventDefault();
+        dragTo(dx);
+      },
+      { signal, passive: false },
+    );
+
+    viewport.addEventListener(
+      "pointerup",
+      (event) => {
+        if (!dragging || event.pointerId !== pointerId) return;
+        finishDrag(event.clientX - startX);
+      },
+      { signal },
+    );
+
+    viewport.addEventListener(
+      "pointercancel",
+      (event) => {
+        if (!dragging || event.pointerId !== pointerId) return;
+        finishDrag(0);
+      },
+      { signal },
+    );
+
+    images.forEach((img) => {
+      if (img.complete) return;
+      img.addEventListener(
+        "load",
+        () => {
+          if (!dragging) apply(false);
+        },
+        { signal },
+      );
+    });
+
+    const observer = new ResizeObserver(() => {
+      const width = stageWidth();
+      if (width === lastWidth) return;
+      lastWidth = width;
+      placeBar();
+      apply(false);
+    });
+    observer.observe(root.parentElement instanceof HTMLElement ? root.parentElement : root);
+
+    placeBar();
+    apply(false);
+    root.classList.add("is-ready");
+
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        abort.abort();
+        observer.disconnect();
+      },
+      { once: true },
+    );
+  }
+
+  bootFlippers();
+  document.addEventListener("astro:page-load", bootFlippers);
+</script>
