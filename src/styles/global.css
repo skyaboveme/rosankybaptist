@@ -95,16 +95,17 @@ a {
 
 .nav-links {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.15rem;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem 1.15rem;
 }
 
 .nav-links a {
-  display: block;
+  display: inline-block;
   font-size: 1.05rem;
   font-weight: 650;
-  line-height: 1.35;
+  line-height: 1.2;
   letter-spacing: 0.01em;
   color: rgba(243, 236, 223, 0.88);
 }
@@ -755,7 +756,7 @@ a {
 }
 
 #worship {
-  scroll-margin-top: 12rem;
+  scroll-margin-top: 6rem;
 }
 
 .cross {
@@ -1000,7 +1001,15 @@ a {
     align-items: flex-start;
   }
 
-  .nav-links,
+  .nav-links {
+    justify-content: flex-start;
+    gap: 0.35rem 0.85rem;
+  }
+
+  .nav-links a {
+    font-size: 0.95rem;
+  }
+
   .footer-nav {
     align-items: flex-start;
   }
@@ -1014,7 +1023,7 @@ a {
   }
 
   #worship {
-    scroll-margin-top: 20rem;
+    scroll-margin-top: 8rem;
   }
 
   .overlay-card {
