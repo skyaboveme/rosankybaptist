@@ -131,12 +131,27 @@ const ticker = "9:00 Bible Study  ·  10:00 Worship  ·  Nursery available  ·  
     </p>
   </section>
 
+  <section class="band" aria-labelledby="give-heading">
+    <div class="split">
+      <div>
+        <h2 id="give-heading" class="section-title">Give</h2>
+        <p class="mt-4 max-w-xl text-lg ink-soft">
+          Give on site Sunday morning, mail a check payable to “Rosanky Baptist Church” to {site.mailingAddress[0]}, {site.mailingAddress[1]}, or give online.
+        </p>
+        <p class="hero-actions">
+          <a class="link-arrow" href={site.giveOnline} target="_blank" rel="noopener noreferrer">Give online</a>
+          <a class="link-arrow" href="/give">Ways to give</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
   <section class="band">
     <div class="split">
       <div>
         <h2 class="section-title">Get the app</h2>
         <p class="mt-4 max-w-xl text-lg ink-soft">
-          Stay connected and get the latest content. Download “Church Center” on any app store and search “Rosanky Baptist Church” to view the calendar, give, and more.
+          Stay connected and get the latest content. Download “Church Center” on any app store and search “Rosanky Baptist Church” to view the calendar, <a href={site.giveOnline} target="_blank" rel="noopener noreferrer">give</a>, and more.
         </p>
         <p class="mt-6">
           <a class="link-arrow" href={site.churchCenter} target="_blank" rel="noopener noreferrer">

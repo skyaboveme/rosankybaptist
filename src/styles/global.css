@@ -94,7 +94,8 @@ body {
   color: rgba(243, 236, 223, 0.82);
 }
 
-.nav-links a[aria-current="page"] {
+.nav-links a[aria-current="page"],
+.nav-links a.give-online {
   color: #f6e7c3;
   box-shadow: inset 0 -2px 0 #c8962e;
 }

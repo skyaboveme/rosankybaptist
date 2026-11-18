@@ -13,7 +13,7 @@ const paths = [
   {
     href: site.churchCenter,
     title: "Church Center",
-    body: "Download Church Center and search “Rosanky Baptist Church” for the calendar, giving, and more. Members also sign in here.",
+    body: "Download Church Center and search “Rosanky Baptist Church” for the calendar and more. Members also sign in here.",
     external: true,
   },
   {
@@ -25,6 +25,7 @@ const paths = [
     href: "/give",
     title: "Give",
     body: "Give on site Sunday morning, mail a check to PO BOX 96, or give online.",
+    give: true,
   },
 ];
 ---
@@ -49,15 +50,24 @@ const paths = [
       {
         paths.map((path) => (
           <li>
-            <a
-              href={path.href}
-              class="block h-full rounded-2xl bg-paper p-6 shadow-sm ring-1 ring-cream-deep hover:bg-cream"
-              target={path.external ? "_blank" : undefined}
-              rel={path.external ? "noopener noreferrer" : undefined}
-            >
-              <h2 class="font-serif text-2xl">{path.title}</h2>
-              <p class="mt-2 text-ink-soft">{path.body}</p>
-            </a>
+            <div class="h-full rounded-2xl bg-paper p-6 shadow-sm ring-1 ring-cream-deep">
+              <a
+                href={path.href}
+                class="block hover:underline"
+                target={path.external ? "_blank" : undefined}
+                rel={path.external ? "noopener noreferrer" : undefined}
+              >
+                <h2 class="font-serif text-2xl">{path.title}</h2>
+                <p class="mt-2 text-ink-soft">{path.body}</p>
+              </a>
+              {path.give && (
+                <p class="mt-3">
+                  <a class="link-arrow" href={site.giveOnline} target="_blank" rel="noopener noreferrer">
+                    Give online
+                  </a>
+                </p>
+              )}
+            </div>
           </li>
         ))
       }

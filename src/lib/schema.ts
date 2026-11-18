@@ -97,6 +97,18 @@ export function pageGraph(options: {
         closes: site.sundayHours.closes,
       },
       event: [`${site.url}/#bible-study`, `${site.url}/#worship`],
+      potentialAction: {
+        "@type": "DonateAction",
+        name: "Give online",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: site.giveOnline,
+          actionPlatform: [
+            "https://schema.org/DesktopWebPlatform",
+            "https://schema.org/MobileWebPlatform",
+          ],
+        },
+      },
     },
     sundayEvent(
       `${site.url}/#bible-study`,
