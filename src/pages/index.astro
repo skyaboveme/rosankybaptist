@@ -30,14 +30,18 @@ const family = [
   },
 ];
 
-const steps = [
-  { href: "/visit", title: "I'm new here" },
-  { href: "/pray-for-me", title: "Pray for me" },
-  { href: site.podcastShow, title: "Bible and Life", external: true },
-  { href: site.giveOnline, title: "I want to give", external: true },
-  { href: "/calendar", title: "See the calendar" },
-  { href: "/trumpet", title: "Read Trumpet News" },
-  { href: site.facebook, title: "See us on Facebook", external: true },
+type ActionStep =
+  | { kind: "link"; href: string; title: string; external?: boolean }
+  | { kind: "bible-and-life" };
+
+const steps: ActionStep[] = [
+  { kind: "link", href: "/visit", title: "I'm new here" },
+  { kind: "link", href: "/pray-for-me", title: "Pray for me" },
+  { kind: "bible-and-life" },
+  { kind: "link", href: site.giveOnline, title: "I want to give", external: true },
+  { kind: "link", href: "/calendar", title: "See the calendar" },
+  { kind: "link", href: "/trumpet", title: "Read Trumpet News" },
+  { kind: "link", href: site.facebook, title: "See us on Facebook", external: true },
 ];
 ---
 
@@ -65,30 +69,54 @@ const steps = [
       <nav aria-label="What would you like to do?">
         <ul class="step-list">
           {
-            steps.map((step) => (
-              <li>
-                <a
-                  href={step.href}
-                  target={step.external ? "_blank" : undefined}
-                  rel={step.external ? "noopener noreferrer" : undefined}
-                >
-                  <span>{step.title}</span>
-                  {step.external && <span class="visually-hidden">Opens in a new tab</span>}
-                  <span class="step-arrow" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" width="20" height="20" focusable="false">
-                      <path
-                        d="M5 12h14M13 6l6 6-6 6"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.75"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  </span>
-                </a>
-              </li>
-            ))
+            steps.map((step) =>
+              step.kind === "bible-and-life" ? (
+                <li>
+                  <article class="show-unit" aria-labelledby="bible-and-life-action">
+                    <h2 id="bible-and-life-action" class="show-unit-title">Bible and Life</h2>
+                    <iframe
+                      class="spotify-embed spotify-show"
+                      title="Bible and Life with Dr. Mark Redd on Spotify"
+                      src={site.podcastShowEmbed}
+                      width="100%"
+                      height="352"
+                      loading="lazy"
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                    <p class="show-unit-action">
+                      <a href={site.podcastShow} target="_blank" rel="noopener noreferrer">
+                        Open in Spotify
+                        <span class="visually-hidden">Opens in a new tab</span>
+                      </a>
+                    </p>
+                  </article>
+                </li>
+              ) : (
+                <li>
+                  <a
+                    href={step.href}
+                    target={step.external ? "_blank" : undefined}
+                    rel={step.external ? "noopener noreferrer" : undefined}
+                  >
+                    <span>{step.title}</span>
+                    {step.external && <span class="visually-hidden">Opens in a new tab</span>}
+                    <span class="step-arrow" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="20" height="20" focusable="false">
+                        <path
+                          d="M5 12h14M13 6l6 6-6 6"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.75"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </span>
+                  </a>
+                </li>
+              )
+            )
           }
         </ul>
       </nav>

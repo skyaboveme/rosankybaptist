@@ -488,7 +488,7 @@ a {
 .address a:hover,
 .address-meta a:hover,
 .footer-contact a:hover,
-.step-list a:hover,
+.step-list > li > a:hover,
 .path-list a:hover {
   color: var(--color-brick);
 }
@@ -577,7 +577,7 @@ a {
   list-style: none;
 }
 
-.step-list a,
+.step-list > li > a,
 .path-list a {
   display: flex;
   align-items: center;
@@ -594,7 +594,7 @@ a {
   gap: 0.7rem;
 }
 
-.step-list a {
+.step-list > li > a {
   position: relative;
   border-radius: 0.95rem;
   background: #fff;
@@ -606,13 +606,46 @@ a {
   box-shadow: none;
 }
 
-.step-list a:hover {
+.step-list > li > a:hover {
   background: #fff;
 }
 
 .step-arrow {
   display: inline-flex;
   flex: none;
+}
+
+.show-unit {
+  border-radius: 0.95rem;
+  background: #fff;
+  padding: 1.15rem 1.35rem 1.2rem;
+  color: #1c1612;
+}
+
+.show-unit-title {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.3;
+  text-transform: none;
+}
+
+.show-unit-action {
+  margin: 0.9rem 0 0;
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.show-unit-action a {
+  position: relative;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.show-unit-action a:hover {
+  color: var(--color-brick);
 }
 
 .visually-hidden {
@@ -877,6 +910,10 @@ a {
   border-radius: 0.8rem;
 }
 
+.spotify-show {
+  height: 352px;
+}
+
 .site-footer {
   background: white;
   color: var(--color-ink);
@@ -1093,7 +1130,7 @@ a {
   .btn,
   .overlay-card img,
   .family-card img,
-  .step-list a,
+  .step-list > li > a,
   .path-list a {
     transition: background 0.2s ease, transform 0.35s ease;
   }
