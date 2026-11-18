@@ -34,7 +34,7 @@ const steps = [
   { href: "/visit", title: "I'm new here" },
   { href: "/pray-for-me", title: "Pray for me" },
   { href: site.podcastShow, title: "Bible and Life", external: true },
-  { href: "/give", title: "I want to give" },
+  { href: site.giveOnline, title: "I want to give", external: true },
   { href: "/calendar", title: "See the calendar" },
   { href: "/trumpet", title: "Read Trumpet News" },
   { href: site.facebook, title: "See us on Facebook", external: true },
@@ -57,6 +57,41 @@ const steps = [
         <a class="btn btn-cream" href="/visit">I'm new</a>
         <a class="btn btn-ghost" href={site.mapUrl} target="_blank" rel="noopener noreferrer">Directions</a>
       </p>
+    </div>
+  </section>
+
+  <section class="action-band">
+    <div class="band-inner">
+      <nav aria-label="What would you like to do?">
+        <ul class="step-list">
+          {
+            steps.map((step) => (
+              <li>
+                <a
+                  href={step.href}
+                  target={step.external ? "_blank" : undefined}
+                  rel={step.external ? "noopener noreferrer" : undefined}
+                >
+                  <span>{step.title}</span>
+                  {step.external && <span class="visually-hidden">Opens in a new tab</span>}
+                  <span class="step-arrow" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="20" height="20" focusable="false">
+                      <path
+                        d="M5 12h14M13 6l6 6-6 6"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
     </div>
   </section>
 
@@ -116,7 +151,7 @@ const steps = [
   </section>
 
   <section class="connect-band">
-    <div class="band-inner connect-grid">
+    <div class="band-inner">
       <div class="connect-card">
         <h2>Stay connected</h2>
         <p>
@@ -127,22 +162,6 @@ const steps = [
           <a class="btn btn-cream" href={site.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
         </p>
       </div>
-      <ul class="step-list">
-        {
-          steps.map((step) => (
-            <li>
-              <a
-                href={step.href}
-                target={step.external ? "_blank" : undefined}
-                rel={step.external ? "noopener noreferrer" : undefined}
-              >
-                <span>{step.title}</span>
-                <span aria-hidden="true">→</span>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
     </div>
   </section>
 
