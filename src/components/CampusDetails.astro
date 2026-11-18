@@ -1,0 +1,67 @@
+---
+import { site } from "../data/site";
+---
+
+<div class="campus-grid">
+  <div class="stack">
+    <section class="panel" aria-labelledby="times-heading">
+      <h2 id="times-heading" class="panel-title">Service times</h2>
+      <p class="day-label">Sunday</p>
+      <div class="time-block">
+        <p class="time">9:00 AM</p>
+        <p class="time-name">Bible Study Classes</p>
+      </div>
+      <div class="time-block">
+        <p class="time">10:00 AM</p>
+        <p class="time-name">Worship Service</p>
+      </div>
+      <p class="times-note">
+        Check in your children for their Bible Study Classes and find one of the many Adult Bible Study classes we offer.
+      </p>
+      <p class="times-note">
+        Family Praise and Worship takes place in the main sanctuary, and then the children’s church proceeds to their classes. Nursery available.
+      </p>
+      <p class="times-note">Sunday hours listed on the site: 9:00 AM–11:00 AM.</p>
+      <p class="panel-action">
+        <a class="btn" href="/visit">I'm new</a>
+      </p>
+    </section>
+
+    <section class="panel" aria-labelledby="address-heading">
+      <h2 id="address-heading" class="panel-title">Campus information</h2>
+      <p class="day-label">Church address</p>
+      <p class="address">
+        <a href={site.mapUrl} target="_blank" rel="noopener noreferrer">
+          {site.streetLine1}<br />
+          {site.city}, {site.region} {site.postalCode}
+        </a>
+      </p>
+      <p class="address-meta">
+        <a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a><br />
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+      <p class="panel-action">
+        <a class="btn" href="/contact">Contact us</a>
+      </p>
+    </section>
+  </div>
+
+  <div class="stack">
+    <figure class="map-frame">
+      <img
+        src="/images/campus-map.png"
+        alt="Aerial campus map on FM 535 labeling the fellowship hall, the sanctuary with Bible study and the church office, and the neighboring Rosanky Christian Academy building."
+        width="1200"
+        height="900"
+      />
+      <figcaption>
+        The map labels the fellowship hall and the worship sanctuary, Bible study, and church office.
+      </figcaption>
+    </figure>
+    <section class="panel" aria-labelledby="vision-heading">
+      <h2 id="vision-heading" class="day-label">Vision</h2>
+      <p class="vision-line">{site.vision}</p>
+      <p class="mission-line">{site.mission}</p>
+    </section>
+  </div>
+</div>

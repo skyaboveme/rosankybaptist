@@ -9,19 +9,15 @@ import { site } from "../data/site";
     title="Calendar"
     lede="The church calendar is hosted in Church Center, the same calendar embedded on the current site."
   />
-  <section class="mx-auto max-w-6xl px-4 py-10 md:px-6">
-    <p class="mb-6">
-      <a
-        href={`${site.churchCenter}calendar`}
-        class="font-semibold text-brick underline underline-offset-2"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+  <section class="band band-tight">
+    <div class="band-inner stack">
+    <p>
+      <a class="btn" href={`${site.churchCenter}calendar`} target="_blank" rel="noopener noreferrer">
         Open the calendar on Church Center
       </a>
-      if the embed does not load.
     </p>
-    <div class="overflow-hidden rounded-2xl bg-paper p-2 shadow-sm">
+    <p class="times-note">The church calendar is hosted in Church Center. Use the button above if the embed does not load.</p>
+    <div class="panel calendar-frame">
       <script is:inline src="https://rosankybc.churchcenter.com/assets/calendar_embed.js" data-height="auto"></script>
     </div>
     <noscript>
@@ -30,5 +26,6 @@ import { site } from "../data/site";
         <a href={`${site.churchCenter}calendar`}>View it on Church Center.</a>
       </p>
     </noscript>
+    </div>
   </section>
 </Base>

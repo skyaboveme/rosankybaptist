@@ -1,169 +1,188 @@
 ---
 import Base from "../layouts/Base.astro";
+import CampusDetails from "../components/CampusDetails.astro";
 import { site } from "../data/site";
 
-const photos = [
-  {
-    src: "/images/gallery/gathering.jpg",
-    alt: "Two older women smiling at an outdoor gathering, one wearing a green jacket and the other a leopard print shirt, holding cups, with other people in the background.",
-  },
+const family = [
   {
     src: "/images/gallery/kite.jpg",
     alt: "A young girl with a backpack and jacket smiling and holding a small red kite outdoors at night, with string lights and hay bales in the background.",
-  },
-  {
-    src: "/images/gallery/cross.jpg",
-    alt: "Two people smiling in front of a wooden cross draped with purple and white cloth.",
+    title: "Children",
+    body: "Check in your children for their Bible Study Classes. After family praise, children’s church proceeds to their classes. Nursery available.",
+    href: "/visit",
+    label: "What to expect",
   },
   {
     src: "/images/gallery/woj.jpg",
     alt: "Church photo from the Rosanky Baptist Church gallery (original file name woj 26.jpg).",
-  },
-  {
-    src: "/images/gallery/angels.jpg",
-    alt: "Church photo from the Rosanky Baptist Church gallery (original file name Angels.jpg).",
+    title: "Bible study",
+    body: "Find one of the many Adult Bible Study classes we offer. Bible study is at 9:00 AM, before worship.",
+    href: "/visit",
+    label: "I'm new",
   },
   {
     src: "/images/gallery/announcer.jpg",
     alt: "The announcer, Bro JR, from a Rosanky Baptist Church gathering.",
+    title: "The church family",
+    body: "Download Church Center and search “Rosanky Baptist Church” for the calendar, giving, and more. Members sign in there too.",
+    href: "/get-connected",
+    label: "Get connected",
   },
 ];
 
-const ticker = "9:00 Bible Study  ·  10:00 Worship  ·  Nursery available  ·  2160 FM 535, Rosanky  ·  ";
+const steps = [
+  { href: "/visit", title: "I'm new here" },
+  { href: "/pray-for-me", title: "Pray for me" },
+  { href: "/give", title: "I want to give" },
+  { href: "/calendar", title: "See the calendar" },
+  { href: "/trumpet", title: "Read Trumpet News" },
+];
 ---
 
 <Base title="Rosanky Baptist Church | Join Our Faith Community Today">
-  <section class="hero">
-    <div>
-      <p class="kicker"><span class="cross" aria-hidden="true"></span> Rosanky, Texas</p>
-      <h1>
-        The<br />
-        <em>lighthouse</em><br />
-        on the hillside.
-      </h1>
-      <p class="hero-lead">
-        We are a Christ Centered, Caring Church Family. Bible study at 9:00 AM and worship at 10:00 AM every Sunday.
-      </p>
+  <section class="campus-hero">
+    <img
+      src="/images/worship.png"
+      alt="People kneeling in prayer on the sanctuary steps during worship at Rosanky Baptist Church."
+      width="1500"
+      height="1000"
+    />
+    <div class="hero-copy">
+      <h1>Rosanky</h1>
+      <p class="hero-tagline">{site.tagline}</p>
+      <p class="hero-times">Sundays · 9:00 Bible study · 10:00 worship</p>
       <p class="hero-actions">
-        <a class="link-arrow" href="/visit">I'm new</a>
-        <a class="link-arrow" href={site.mapUrl} target="_blank" rel="noopener noreferrer">Directions</a>
+        <a class="btn btn-cream" href="/visit">I'm new</a>
+        <a class="btn btn-ghost" href={site.mapUrl} target="_blank" rel="noopener noreferrer">Directions</a>
       </p>
     </div>
-    <figure class="hero-photo">
-      <div class="beam" aria-hidden="true"></div>
-      <img
-        src="/images/worship.png"
-        alt="People kneeling in prayer on the sanctuary steps during worship at Rosanky Baptist Church."
-        width="1500"
-        height="1000"
-      />
-      <figcaption>Sunday worship · the sanctuary</figcaption>
-    </figure>
   </section>
 
-  <div class="ticker" aria-hidden="true">
-    <div class="ticker-track">
-      <span>{ticker}{ticker}</span>
-      <span>{ticker}{ticker}</span>
-    </div>
-  </div>
+  <section class="band" aria-label="What's happening">
+    <div class="band-inner promo-grid">
+      <a class="overlay-card" href="/visit">
+        <img
+          src="/images/gallery/gathering.jpg"
+          alt="Two older women smiling at an outdoor gathering, one wearing a green jacket and the other a leopard print shirt, holding cups, with other people in the background."
+          width="800"
+          height="600"
+        />
+        <span class="scrim" aria-hidden="true"></span>
+        <span class="overlay-copy">
+          <span class="overlay-kicker">This Sunday</span>
+          <span class="overlay-title">Plan your visit</span>
+          <span class="overlay-text">
+            We are a Christ Centered, Caring Church Family. Bible study at 9:00 AM and worship at 10:00 AM every Sunday.
+          </span>
+          <span class="btn btn-cream">I'm new</span>
+        </span>
+      </a>
 
-  <section class="sunday" aria-labelledby="sunday-heading">
-    <div class="sunday-head">
-      <h2 id="sunday-heading">Sunday morning</h2>
-      <p class="hours-note">Sunday hours listed on the site: 9:00 AM–11:00 AM.</p>
+      <article class="media-card">
+        <a href={site.pinewoodForm} target="_blank" rel="noopener noreferrer">
+          <img
+            src="/images/pinewood-derby.png"
+            alt="Community Pinewood Derby invitation from Rosanky Baptist Church."
+            width="1200"
+            height="800"
+          />
+        </a>
+        <div class="media-card-body">
+          <p class="day-label">Upcoming</p>
+          <h2>Start your engines, Rosanky.</h2>
+          <p>You're invited to a community Pinewood Derby race hosted by Rosanky Baptist Church.</p>
+          <ul>
+            <li>Sunday, November 15 at 5:00 PM</li>
+            <li>Trophies for Fastest Car and Most Creative Car</li>
+            <li>Free food and refreshments</li>
+          </ul>
+          <p>
+            You don't have to race to join the fun. Come cheer on the racers, enjoy some food, and spend time with friends and neighbors. This event is for everyone in our community.
+          </p>
+          <p>
+            <a class="btn" href={site.pinewoodForm} target="_blank" rel="noopener noreferrer">Sign up</a>
+          </p>
+        </div>
+      </article>
     </div>
-    <ol>
-      <li>
-        <time datetime="09:00">9:00</time>
+  </section>
+
+  <section class="band band-tight" aria-label="Service times and campus">
+    <div class="band-inner">
+      <CampusDetails />
+    </div>
+  </section>
+
+  <section class="connect-band">
+    <div class="band-inner connect-grid">
+      <div class="connect-card">
+        <h2>Stay connected</h2>
+        <p>
+          Stay connected and get the latest content. Download “Church Center” on any app store and search “Rosanky Baptist Church” to view the calendar, give, and more.
+        </p>
+        <p>
+          <a class="btn btn-cream" href={site.churchCenter} target="_blank" rel="noopener noreferrer">Church Center</a>
+        </p>
+      </div>
+      <ul class="step-list">
+        {
+          steps.map((step) => (
+            <li>
+              <a href={step.href}>
+                <span>{step.title}</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="band" id="worship" aria-labelledby="sunday-heading">
+    <div class="band-inner">
+      <article class="feature">
+        <img
+          src="/images/gallery/cross.jpg"
+          alt="Two people smiling in front of a wooden cross draped with purple and white cloth."
+          width="800"
+          height="600"
+        />
         <div>
-          <h3>Bible Study Classes</h3>
+          <h2 id="sunday-heading">Sunday morning</h2>
           <p>
             Check in your children for their Bible Study Classes and find one of the many Adult Bible Study classes we offer.
           </p>
-        </div>
-      </li>
-      <li>
-        <time datetime="10:00">10:00</time>
-        <div>
-          <h3>Worship Service</h3>
           <p>
             Family Praise and Worship takes place in the main sanctuary, and then the children’s church proceeds to their classes. Nursery available.
           </p>
+          <p class="feature-meta">9:00 AM — Bible Study Classes</p>
+          <p class="feature-meta">10:00 AM — Worship in the sanctuary, then children’s church. Nursery available.</p>
+          <p>
+            <a class="btn" href="/visit">I'm new</a>
+          </p>
         </div>
-      </li>
-    </ol>
-  </section>
-
-  <section class="derby" aria-labelledby="derby-heading">
-    <a class="derby-flyer" href={site.pinewoodForm} target="_blank" rel="noopener noreferrer">
-      <img
-        src="/images/pinewood-derby.png"
-        alt="Community Pinewood Derby invitation from Rosanky Baptist Church."
-        width="1200"
-        height="800"
-      />
-    </a>
-    <div>
-      <p class="kicker" style="color:#e7c98a">Featured on the church homepage</p>
-      <h2 id="derby-heading">Start your engines, Rosanky.</h2>
-      <p class="mt-4 text-lg text-cream/85">
-        You're invited to a community Pinewood Derby race hosted by Rosanky Baptist Church.
-      </p>
-      <ul>
-        <li>Sunday, November 15 at 5:00 PM</li>
-        <li>Trophies for Fastest Car and Most Creative Car</li>
-        <li>Free food and refreshments</li>
-      </ul>
-      <p class="mt-4 text-cream/80">
-        You don't have to race to join the fun. Come cheer on the racers, enjoy some food, and spend time with friends and neighbors. This event is for everyone in our community.
-      </p>
-      <p class="mt-6">
-        <a class="link-arrow" href={site.pinewoodForm} target="_blank" rel="noopener noreferrer">Sign up</a>
-      </p>
+      </article>
     </div>
   </section>
 
-  <section class="vision-band">
-    <p>
-      <span>Vision</span>
-      {site.vision}
-    </p>
-  </section>
-
-  <section class="band">
-    <div class="split">
-      <div>
-        <h2 class="section-title">Get the app</h2>
-        <p class="mt-4 max-w-xl text-lg ink-soft">
-          Stay connected and get the latest content. Download “Church Center” on any app store and search “Rosanky Baptist Church” to view the calendar, give, and more.
-        </p>
-        <p class="mt-6">
-          <a class="link-arrow" href={site.churchCenter} target="_blank" rel="noopener noreferrer">
-            <img src="/images/church-center.png" alt="" width="28" height="28" class="inline h-7 w-7" />
-            Church Center
-          </a>
-        </p>
+  <section class="band band-tight" aria-labelledby="family-heading">
+    <div class="band-inner">
+      <h2 id="family-heading" class="block-title">For your family</h2>
+      <div class="family-grid">
+        {
+          family.map((card) => (
+            <article class="family-card">
+              <img src={card.src} alt={card.alt} width="800" height="600" loading="lazy" />
+              <div class="family-card-body">
+                <h3>{card.title}</h3>
+                <p>{card.body}</p>
+                <a class="btn" href={card.href}>{card.label}</a>
+              </div>
+            </article>
+          ))
+        }
       </div>
-      <p class="ink-soft">
-        <a class="link-arrow" href={site.mapUrl} target="_blank" rel="noopener noreferrer">{site.streetShort}</a>
-        <br />
-        <a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a>
-      </p>
     </div>
-  </section>
-
-  <section class="film-wrap" aria-labelledby="life-heading">
-    <h2 id="life-heading">Life together</h2>
-    <p class="ink-soft">Photographs from the church site. Slide sideways.</p>
-    <ul class="filmstrip">
-      {
-        photos.map((photo) => (
-          <li>
-            <img src={photo.src} alt={photo.alt} width="800" height="600" loading="lazy" />
-          </li>
-        ))
-      }
-    </ul>
   </section>
 </Base>

@@ -30,9 +30,10 @@ export const site = {
 } as const;
 
 export const nav = [
-  { href: "/", label: "Home" },
-  { href: "/visit", label: "I'm New & Beliefs" },
-  { href: "/give", label: "Give" },
-  { href: "/calendar", label: "Calendar" },
-  { href: "/trumpet", label: "Trumpet News" },
+  { href: "/", label: "Home", external: false },
+  { href: "/#worship", label: "Worship", external: false },
+  { href: "/give", label: "Give", external: false },
+  { href: "/visit", label: "Attend", external: false },
+  { href: "/trumpet", label: "News", external: false },
+  { href: site.churchCenter, label: "Members", external: true },
 ] as const;

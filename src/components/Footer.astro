@@ -1,27 +1,46 @@
 ---
-import { site } from "../data/site";
+import { nav, site } from "../data/site";
 ---
 
 <footer class="site-footer">
-  <div class="vision">
-    <p class="kicker" style="color:#e7c98a; margin-bottom:0.7rem;">Vision</p>
-    <p>{site.vision}</p>
-  </div>
-  <div class="footer-row">
-    <p>
-      <a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a><br />
-      <a href={`mailto:${site.email}`}>{site.email}</a>
-    </p>
-    <p>
-      <a href={site.mapUrl} target="_blank" rel="noopener noreferrer">
-        {site.streetLine1}<br />{site.city}, {site.region} {site.postalCode}
+  <div class="footer-rule" aria-hidden="true"></div>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" aria-label={`${site.name} home`}>
+        <img src="/images/logo.png" alt="" width="280" height="72" />
       </a>
-    </p>
-    <p>
-      <a href="/pray-for-me">Pray For Me</a><br />
-      <a href="/get-connected">Get Connected</a><br />
-      <a href="/contact">Contact</a>
-    </p>
+      <p>{site.tagline}</p>
+    </div>
+    <nav class="footer-nav" aria-label="Primary">
+      {
+        nav.map((item) => (
+          <a href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noopener noreferrer" : undefined}>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="footer-contact">
+      <p>
+        <a href={site.mapUrl} target="_blank" rel="noopener noreferrer">
+          {site.streetLine1}<br />
+          {site.city}, {site.region} {site.postalCode}
+        </a>
+      </p>
+      <p>
+        <a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a><br />
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+      <p>
+        Mail checks to {site.mailingAddress[0]}, {site.mailingAddress[1]}.
+      </p>
+      <p>
+        <a href="/contact">Contact</a><br />
+        <a href="/pray-for-me">Pray for me</a><br />
+        <a href="/calendar">Calendar</a><br />
+        <a href={site.giveOnline} target="_blank" rel="noopener noreferrer">Give online</a>
+      </p>
+    </div>
   </div>
   <p class="legal">© {new Date().getFullYear()} {site.name}. All Rights Reserved.</p>
 </footer>

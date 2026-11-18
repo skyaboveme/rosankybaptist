@@ -68,5 +68,14 @@ const jsonLd = pageGraph({
       <slot />
     </main>
     <Footer />
+    <script>
+      function scrollToHash() {
+        const id = location.hash.replace("#", "");
+        if (!id) return;
+        document.getElementById(id)?.scrollIntoView();
+      }
+      scrollToHash();
+      document.addEventListener("astro:page-load", scrollToHash);
+    </script>
   </body>
 </html>

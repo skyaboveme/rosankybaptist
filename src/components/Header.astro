@@ -5,6 +5,7 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 
 function isCurrent(href: string) {
   if (href === "/") return path === "/";
+  if (href.startsWith("/#")) return false;
   return path === href || path.startsWith(`${href}/`);
 }
 ---
@@ -17,31 +18,21 @@ function isCurrent(href: string) {
     <a class="wordmark" href="/" aria-label={`${site.name} home`}>
       <img src="/images/logo-light.png" alt="" width="280" height="72" />
     </a>
-    <button id="menu-toggle" class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-nav">
-      <span class="sr-only">Open menu</span>
-      Menu
-    </button>
     <nav class="nav-links" aria-label="Primary">
       {
         nav.map((item) => (
-          <a href={item.href} aria-current={isCurrent(item.href) ? "page" : undefined}>
+          <a
+            href={item.href}
+            aria-current={isCurrent(item.href) ? "page" : undefined}
+            target={item.external ? "_blank" : undefined}
+            rel={item.external ? "noopener noreferrer" : undefined}
+          >
             {item.label}
           </a>
         ))
       }
-      <a href={site.churchCenter} target="_blank" rel="noopener noreferrer">Members</a>
     </nav>
   </div>
-  <nav id="mobile-nav" class="mobile-panel" aria-label="Mobile" hidden>
-    {
-      nav.map((item) => (
-        <a href={item.href} aria-current={isCurrent(item.href) ? "page" : undefined}>
-          {item.label}
-        </a>
-      ))
-    }
-    <a href={site.churchCenter} target="_blank" rel="noopener noreferrer">Members</a>
-  </nav>
 </header>
 
 <style>
@@ -59,23 +50,3 @@ function isCurrent(href: string) {
     transform: none;
   }
 </style>
-
-<script>
-  function bindMenu() {
-    const toggle = document.getElementById("menu-toggle");
-    const menu = document.getElementById("mobile-nav");
-    if (!toggle || !menu || toggle.dataset.bound === "true") return;
-    toggle.dataset.bound = "true";
-    toggle.addEventListener("click", () => {
-      const open = menu.hasAttribute("hidden");
-      menu.toggleAttribute("hidden", !open);
-      menu.classList.toggle("is-open", open);
-      toggle.setAttribute("aria-expanded", String(open));
-      const label = toggle.querySelector(".sr-only");
-      if (label) label.textContent = open ? "Close menu" : "Open menu";
-    });
-  }
-
-  bindMenu();
-  document.addEventListener("astro:page-load", bindMenu);
-</script>

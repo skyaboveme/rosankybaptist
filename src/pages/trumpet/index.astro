@@ -18,7 +18,8 @@ const categories = [...new Set(posts.flatMap((post) => post.data.categories))].s
     title="Trumpet News"
     lede="Newsletters and stories published on the church site. Every post on the current site is bylined Mission Design Services."
   />
-  <div class="page-wrap" style="padding-top:1.2rem">
+  <div class="band band-tight">
+    <div class="band-inner">
     {
       categories.length > 0 && (
         <ul class="tag-row">
@@ -47,6 +48,7 @@ const categories = [...new Set(posts.flatMap((post) => post.data.categories))].s
           </a>
         ))
       }
+    </div>
     </div>
   </div>
 </Base>
