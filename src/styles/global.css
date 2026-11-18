@@ -172,7 +172,7 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 35%;
+  object-position: center 42%;
 }
 
 .campus-hero::after {
@@ -180,13 +180,19 @@ a {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(16, 11, 8, 0.28), rgba(16, 11, 8, 0.55) 55%, rgba(16, 11, 8, 0.62));
+    linear-gradient(180deg, rgba(16, 11, 8, 0.12), rgba(16, 11, 8, 0.22) 42%, rgba(16, 11, 8, 0.38));
 }
 
 .hero-copy {
   position: relative;
   z-index: 1;
   padding: 4.5rem 1.25rem;
+}
+
+.campus-hero h1,
+.hero-tagline,
+.hero-times {
+  text-shadow: 0 2px 16px rgba(16, 11, 8, 0.45);
 }
 
 .campus-hero h1 {
