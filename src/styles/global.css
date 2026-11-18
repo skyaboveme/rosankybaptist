@@ -547,8 +547,11 @@ a {
   color: rgba(246, 241, 232, 0.86);
 }
 
-.connect-card .btn {
-  margin-top: 0.4rem;
+.connect-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
 }
 
 .step-list,

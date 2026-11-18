@@ -76,6 +76,7 @@ export function pageGraph(options: {
       logo: new URL("/images/logo-mark.png", site.url).href,
       telephone: site.phoneTel,
       email: site.email,
+      sameAs: [site.facebook],
       hasMap: site.mapUrl,
       address: {
         "@type": "PostalAddress",

@@ -36,6 +36,7 @@ const steps = [
   { href: "/give", title: "I want to give" },
   { href: "/calendar", title: "See the calendar" },
   { href: "/trumpet", title: "Read Trumpet News" },
+  { href: site.facebook, title: "See us on Facebook", external: true },
 ];
 ---
 
@@ -118,17 +119,22 @@ const steps = [
       <div class="connect-card">
         <h2>Stay connected</h2>
         <p>
-          Stay connected and get the latest content. Download “Church Center” on any app store and search “Rosanky Baptist Church” to view the calendar, give, and more.
+          Stay connected and get the latest content. Download “Church Center” on any app store and search “Rosanky Baptist Church” to view the calendar, give, and more. Pictures and news from the church family are on Facebook.
         </p>
-        <p>
+        <p class="connect-actions">
           <a class="btn btn-cream" href={site.churchCenter} target="_blank" rel="noopener noreferrer">Church Center</a>
+          <a class="btn btn-cream" href={site.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
         </p>
       </div>
       <ul class="step-list">
         {
           steps.map((step) => (
             <li>
-              <a href={step.href}>
+              <a
+                href={step.href}
+                target={step.external ? "_blank" : undefined}
+                rel={step.external ? "noopener noreferrer" : undefined}
+              >
                 <span>{step.title}</span>
                 <span aria-hidden="true">→</span>
               </a>

@@ -19,6 +19,7 @@ export const site = {
   geo: { lat: 29.9309722, lng: -97.3037247 },
   sundayHours: { opens: "09:00", closes: "11:00" },
   churchCenter: "https://rosankybc.churchcenter.com/",
+  facebook: "https://www.facebook.com/RosankyBaptistChurch",
   prayerForm: "https://rosankybc.churchcenter.com/people/forms/1071699",
   giveOnline: "https://secure.myvanco.com/L-ZB3N/home",
   pinewoodForm:
