@@ -16,7 +16,7 @@ const { tag } = Astro.props;
 const posts = (await allPosts()).filter((post) => post.data.tags.includes(tag));
 ---
 
-<Base title={`${tag} — Trumpet News`} description={`Trumpet News posts tagged ${tag}.`}>
+<Base title={`${tag} — Trumpet News`} description={`Trumpet News posts tagged ${tag}.`} pageType="CollectionPage">
   <PageHero eyebrow="Trumpet News" title={tag} lede="Posts with this tag on the current church site." />
   <div class="mx-auto max-w-3xl px-4 py-12 md:px-6">
     <ul class="space-y-6">
