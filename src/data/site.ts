@@ -36,7 +36,7 @@ export const site = {
 
 export const nav = [
   { href: "/", label: "Home", external: false },
-  { href: "/#worship", label: "Worship", external: false },
+  { href: "/worship", label: "Worship", external: false },
   { href: "/give", label: "Give", external: false },
   { href: "/visit", label: "Attend", external: false },
   { href: "/trumpet", label: "News", external: false },

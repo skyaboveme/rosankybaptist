@@ -1,0 +1,95 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import TodoNote from "../components/TodoNote.astro";
+import { site } from "../data/site";
+---
+
+<Base
+  title="Worship"
+  description="Sunday worship at Rosanky Baptist Church. Bible Study Classes at 9:00 AM and Worship Service at 10:00 AM in the sanctuary. Nursery and children’s church follow family praise."
+  leaf="Worship"
+>
+  <PageHero
+    eyebrow="Sunday"
+    title="Worship"
+    lede="We are a Christ Centered, Caring Church Family. Bible study at 9:00 AM and worship at 10:00 AM every Sunday."
+  />
+
+  <section class="band band-tight" aria-labelledby="sunday-worship-heading">
+    <div class="band-inner">
+      <article class="feature">
+        <img
+          src="/images/home-hero.png"
+          alt="People kneeling in prayer on the sanctuary steps during worship at Rosanky Baptist Church."
+          width="2400"
+          height="1792"
+        />
+        <div>
+          <h2 id="sunday-worship-heading">Sunday morning</h2>
+          <p>
+            Check in your children for their Bible Study Classes and find one of the many Adult Bible Study classes we offer.
+          </p>
+          <p>
+            Family Praise and Worship takes place in the main sanctuary, and then the children’s church proceeds to their classes. Nursery available.
+          </p>
+          <p class="feature-meta">9:00 AM — Bible Study Classes</p>
+          <p class="feature-meta">10:00 AM — Worship in the sanctuary, then children’s church. Nursery available.</p>
+          <p class="feature-meta">Sunday hours listed on the site: 9:00 AM–11:00 AM.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="band band-tight" aria-label="Sanctuary and campus">
+    <div class="band-inner campus-grid">
+      <div class="stack">
+        <section class="panel" aria-labelledby="sanctuary-heading">
+          <h2 id="sanctuary-heading" class="panel-title">The sanctuary</h2>
+          <p class="day-label">Church address</p>
+          <p class="address">
+            <a href={site.mapUrl} target="_blank" rel="noopener noreferrer">
+              {site.streetLine1}<br />
+              {site.city}, {site.region} {site.postalCode}
+            </a>
+          </p>
+          <p class="address-meta">{site.streetShort}</p>
+          <p class="address-meta">
+            <a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a>
+          </p>
+          <p class="panel-action">
+            <a class="btn" href={site.mapUrl} target="_blank" rel="noopener noreferrer">Directions</a>
+          </p>
+        </section>
+        <TodoNote title="TODO">
+          <p>
+            The current site does not publish sermon titles, an order of worship, a livestream, or any gathering besides Sunday 9:00 AM Bible Study Classes and 10:00 AM Worship Service. The Bible and Life show names Dr. Mark Redd as interim pastor; it is not a Sunday sermon list.
+          </p>
+        </TodoNote>
+      </div>
+      <figure class="map-frame">
+        <img
+          src="/images/campus-map.png"
+          alt="Aerial campus map on FM 535 labeling the fellowship hall, the sanctuary with Bible study and the church office, and the neighboring Rosanky Christian Academy building."
+          width="1200"
+          height="900"
+        />
+        <figcaption>
+          The map labels the fellowship hall and the worship sanctuary, Bible study, and church office.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="band band-tight">
+    <div class="band-inner cta-row">
+      <div>
+        <h2>Planning a first Sunday</h2>
+        <p>
+          Nursery is available, and children’s church follows family praise in the sanctuary.
+        </p>
+      </div>
+      <a class="btn" href="/visit">I'm new</a>
+    </div>
+  </section>
+</Base>

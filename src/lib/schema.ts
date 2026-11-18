@@ -23,6 +23,7 @@ export const shareImage = {
 
 const labels: Record<string, string> = {
   visit: "I'm New & Beliefs",
+  worship: "Worship",
   give: "Give",
   calendar: "Calendar",
   contact: "Contact",
@@ -61,12 +62,13 @@ export function breadcrumbs(pathname: string, leaf?: string) {
   return items;
 }
 
-function sundayEvent(id: string, name: string, description: string, startTime: string) {
+function sundayEvent(id: string, name: string, description: string, startTime: string, url?: string) {
   return {
     "@type": "Event",
     "@id": id,
     name,
     description,
+    url,
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     eventStatus: "https://schema.org/EventScheduled",
     isAccessibleForFree: true,
@@ -232,6 +234,7 @@ export function pageGraph(options: {
       "Worship Service",
       "Family Praise and Worship takes place in the main sanctuary, and then the children’s church proceeds to their classes. Nursery available.",
       "10:00",
+      `${site.url}/worship/`,
     ),
     {
       "@type": "WebSite",
@@ -258,9 +261,11 @@ export function pageGraph(options: {
         ? { "@id": postingId }
         : isCollection && onTrumpet
           ? { "@id": blogId }
-            : pathname === "/"
+          : pathname === "/"
             ? { "@id": organizationId }
-            : { "@id": placeId },
+            : pathname === "/worship"
+              ? { "@id": worshipEventId }
+              : { "@id": placeId },
       mentions: isPray ? { "@id": prayerEpisodeId } : undefined,
       potentialAction: isGive
         ? {
