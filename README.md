@@ -53,7 +53,7 @@ Set the production site URL in `astro.config.mjs` (`site`) if the domain changes
 
 - Pastor and staff names are not published.
 - There is no sermon or media archive.
-- Header social icons point at Squarespace’s own accounts, not a church profile, so they are omitted.
+- The church Facebook page is https://www.facebook.com/RosankyBaptistChurch. Header icons on the old site for Instagram and X point at Squarespace’s own accounts, so those are omitted.
 - Two phone numbers appear: `(512) 360-3968` in the footer and tap-to-call link, and `(512) 360-3109` in the site’s business settings.
 - `hello@rosankybc.org` is in the site’s business information and is not printed in the visible footer.
 - The May 2026 and March 2026 “Download Trumpet” buttons have empty links, and those PDFs were not found.

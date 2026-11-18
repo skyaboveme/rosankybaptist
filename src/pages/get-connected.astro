@@ -26,41 +26,49 @@ const paths = [
     title: "Give",
     body: "Give on site Sunday morning, mail a check to PO BOX 96, or give online.",
   },
+  {
+    href: site.facebook,
+    title: "Facebook",
+    body: "See pictures and news from the church family on our Facebook page.",
+    external: true,
+  },
 ];
 ---
 
 <Base
   title="Get Connected"
-  description="Ways to get connected at Rosanky Baptist Church: Sunday worship, Church Center, prayer, and giving."
+  description="Ways to get connected at Rosanky Baptist Church: Sunday worship, Church Center, Facebook, prayer, and giving."
 >
   <PageHero
     title="Get connected"
-    lede="Find a Sunday, open Church Center, or ask the church to pray."
+    lede="Find a Sunday, open Church Center, or see the church family on Facebook."
   />
-  <section class="mx-auto max-w-6xl px-4 py-12 md:px-6">
-    <div class="mb-8">
+  <section class="band band-tight">
+    <div class="band-inner stack">
       <TodoNote title="TODO">
         <p>
           The current /get-connected page does not contain church-specific copy. It shows Squarespace template text (“Whatever it is, the way you tell your story online can make all the difference,” plus “Make it / Dream it / Build it / Grow it”) and stock photos from another Squarespace site. Those placeholders are not repeated here. The footer button labeled Get Connected also has an empty link on the current site.
         </p>
       </TodoNote>
+      <ul class="path-list">
+        {
+          paths.map((path) => (
+            <li>
+              <a
+                href={path.href}
+                target={path.external ? "_blank" : undefined}
+                rel={path.external ? "noopener noreferrer" : undefined}
+              >
+                <span>
+                  <span class="path-title">{path.title}</span>
+                  <span class="path-body">{path.body}</span>
+                </span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </div>
-    <ul class="grid gap-6 md:grid-cols-2">
-      {
-        paths.map((path) => (
-          <li>
-            <a
-              href={path.href}
-              class="block h-full rounded-2xl bg-paper p-6 shadow-sm ring-1 ring-cream-deep hover:bg-cream"
-              target={path.external ? "_blank" : undefined}
-              rel={path.external ? "noopener noreferrer" : undefined}
-            >
-              <h2 class="font-serif text-2xl">{path.title}</h2>
-              <p class="mt-2 text-ink-soft">{path.body}</p>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
   </section>
 </Base>

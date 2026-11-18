@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import PageHero from "../components/PageHero.astro";
+import CampusDetails from "../components/CampusDetails.astro";
 import { site } from "../data/site";
 
 const beliefs = [
@@ -84,72 +85,56 @@ const journey = [
 >
   <PageHero title="Welcome to Rosanky Baptist Church" lede="We are a Christ Centered, Caring Church Family." />
 
-  <section class="mx-auto max-w-6xl px-4 py-14 md:px-6">
-    <h2 class="font-serif text-3xl">When praying about a church</h2>
-    <div class="mt-8 grid gap-6 md:grid-cols-3">
-      <article class="give-row" style="grid-template-columns:1fr; border-top:1px solid rgba(28,22,18,.14); padding-top:1.2rem;">
-        <h3 class="font-serif text-xl text-brick">You need a place to be discipled</h3>
-        <p class="mt-3 text-ink-soft">
-          Discern if the Pastor and people have a heart to include and teach others. Ask how the church facilitates this: by a strong pulpit ministry and sound teaching of the Bible.
-        </p>
-      </article>
-      <article class="give-row" style="grid-template-columns:1fr; border-top:1px solid rgba(28,22,18,.14); padding-top:1.2rem;">
-        <h3 class="font-serif text-xl text-brick">You need a place to be challenged</h3>
-        <p class="mt-3 text-ink-soft">
-          Seek a Pastor and People who have a passion for God and compassion for others. Ask about the emphasis put on the home and reaching the lost.
-        </p>
-      </article>
-      <article class="give-row" style="grid-template-columns:1fr; border-top:1px solid rgba(28,22,18,.14); padding-top:1.2rem;">
-        <h3 class="font-serif text-xl text-brick">You need a place to be used</h3>
-        <p class="mt-3 text-ink-soft">
-          Look for a Pastor and People with God’s vision for what He wants to do through His Church. Ask God to lead you to the right place of service that He has chosen for you.
-        </p>
-      </article>
+  <section class="band band-tight" aria-label="Service times and campus">
+    <div class="band-inner">
+      <CampusDetails />
     </div>
   </section>
 
-  <section class="bg-paper" aria-labelledby="sunday-heading">
-    <div class="mx-auto grid max-w-6xl items-center gap-8 px-4 py-14 md:grid-cols-2 md:px-6">
-      <div>
-        <h2 id="sunday-heading" class="font-serif text-3xl">Join us Sunday morning</h2>
-        <h3 class="mt-6 font-serif text-xl">9:00 AM: Bible Study Classes</h3>
-        <p class="mt-2 text-ink-soft">
-          Check in your children for their Bible Study Classes and find one of the many Adult Bible Study classes we offer.
-        </p>
-        <h3 class="mt-6 font-serif text-xl">10:00 AM: Worship Service</h3>
-        <p class="mt-2 text-ink-soft">
-          Family Praise and Worship takes place in the main sanctuary, and then the children’s church proceeds to their classes. Nursery available.
-        </p>
-        <p class="mt-4 text-sm text-ink-soft">Sunday hours listed on the site: 9:00 AM–11:00 AM.</p>
+  <section class="band band-tight">
+    <div class="band-inner">
+      <h2 class="block-title">When praying about a church</h2>
+      <div class="family-grid">
+        <article class="info-card">
+          <h3>You need a place to be discipled</h3>
+          <p>
+            Discern if the Pastor and people have a heart to include and teach others. Ask how the church facilitates this: by a strong pulpit ministry and sound teaching of the Bible.
+          </p>
+        </article>
+        <article class="info-card">
+          <h3>You need a place to be challenged</h3>
+          <p>
+            Seek a Pastor and People who have a passion for God and compassion for others. Ask about the emphasis put on the home and reaching the lost.
+          </p>
+        </article>
+        <article class="info-card">
+          <h3>You need a place to be used</h3>
+          <p>
+            Look for a Pastor and People with God’s vision for what He wants to do through His Church. Ask God to lead you to the right place of service that He has chosen for you.
+          </p>
+        </article>
       </div>
-      <figure>
-        <img
-          src="/images/campus-map.png"
-          alt="Aerial campus map on FM 535 labeling the fellowship hall, the sanctuary with Bible study and the church office, and the neighboring Rosanky Christian Academy building."
-          class="w-full rounded-2xl"
-          width="1200"
-          height="900"
-        />
-        <figcaption class="mt-2 text-sm text-ink-soft">
-          Campus map from the I’m New page. The map labels the fellowship hall and the worship sanctuary, Bible study, and church office.
-        </figcaption>
-      </figure>
     </div>
   </section>
 
-  <section class="mx-auto max-w-6xl px-4 py-14 md:px-6">
-    <h2 class="font-serif text-3xl">RBC Mission</h2>
-    <p class="mt-4 max-w-3xl text-xl leading-relaxed">{site.mission}</p>
-
-    <h2 class="mt-12 font-serif text-3xl">Core beliefs</h2>
-    <ul class="mt-6 max-w-3xl space-y-3">
-      {beliefs.map((belief) => <li class="rounded-xl bg-paper px-5 py-4">{belief}</li>)}
-    </ul>
+  <section class="band band-tight">
+    <div class="band-inner stack">
+      <article class="panel">
+        <h2 class="panel-title">RBC Mission</h2>
+        <p class="vision-line">{site.mission}</p>
+      </article>
+      <article class="panel">
+        <h2 class="panel-title">Core beliefs</h2>
+        <ul class="belief-list">
+          {beliefs.map((belief) => <li>{belief}</li>)}
+        </ul>
+      </article>
+    </div>
   </section>
 
-  <section class="bg-navy text-cream">
-    <div class="mx-auto max-w-3xl px-4 py-14 md:px-6">
-      <h2 class="font-serif text-3xl">Begin your faith journey</h2>
+  <section class="ink-band">
+    <div class="band-inner ink-narrow">
+      <h2>Begin your faith journey</h2>
       <div class="mt-4 space-y-4 text-lg leading-relaxed text-cream/90">
         <p>
           The world is seeking meaning, hope and a place to belong. We believe that there is one hope for this life and the life to come through the saving grace of Jesus. The best way to know Jesus is through God’s word, the Bible. The word of God shows us our fractured relationship with a holy God and that, through Jesus, that relationship can be restored. Our hope and prayer, for you is to know the transforming power of Jesus and His love for you.
@@ -162,38 +147,35 @@ const journey = [
     </div>
   </section>
 
-  <section class="mx-auto max-w-3xl px-4 py-14 md:px-6">
-    {
-      journey.map((step) => (
-        <article class="border-b border-cream-deep py-8">
-          <h2 class="font-serif text-3xl">{step.title}</h2>
-          {step.body.map((paragraph) => (
-            <p class="mt-3 leading-relaxed text-ink-soft">{paragraph}</p>
-          ))}
-          <blockquote class="mt-4 font-serif text-xl">
-            {step.quote}
-            <cite class="mt-1 block text-base not-italic text-brick">{step.cite}</cite>
-          </blockquote>
-        </article>
-      ))
-    }
+  <section class="band">
+    <div class="band-inner journey">
+      {
+        journey.map((step) => (
+          <article>
+            <h2>{step.title}</h2>
+            {step.body.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+            <blockquote>
+              {step.quote}
+              <cite>{step.cite}</cite>
+            </blockquote>
+          </article>
+        ))
+      }
+    </div>
   </section>
 
-  <section class="bg-paper">
-    <div class="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-12 md:flex-row md:items-center md:justify-between md:px-6">
+  <section class="band band-tight">
+    <div class="band-inner cta-row">
       <div>
-        <h2 class="font-serif text-2xl">Get the app</h2>
-        <p class="mt-2 max-w-xl text-ink-soft">
+        <h2>Get the app</h2>
+        <p>
           Stay connected and get the latest content. Download “Church Center” on any app store and search “Rosanky Baptist Church” to view the calendar, give, and more.
         </p>
       </div>
-      <a
-        href={site.churchCenter}
-        class="rounded-full bg-pine px-5 py-3 text-center font-semibold text-paper"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Download the app
+      <a class="btn" href={site.churchCenter} target="_blank" rel="noopener noreferrer">
+        Church Center
       </a>
     </div>
   </section>
