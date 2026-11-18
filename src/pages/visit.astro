@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import PageHero from "../components/PageHero.astro";
 import CampusDetails from "../components/CampusDetails.astro";
+import TodoNote from "../components/TodoNote.astro";
 import { site } from "../data/site";
 
 const beliefs = [
@@ -79,11 +80,146 @@ const journey = [
 
 <Base
   title="I'm New | Join Our Faith Community Today"
-  description="Discover Rosanky Baptist Church. Join us for worship, Bible studies, and fellowship. Get connected and grow in faith with our welcoming community."
+  description="What to expect on a Sunday at Rosanky Baptist Church: Bible study at 9:00, worship at 10:00, kids check-in, and a way to tell us your name before you arrive."
   pageType="AboutPage"
   leaf="I'm New & Beliefs"
 >
   <PageHero title="Welcome to Rosanky Baptist Church" lede="We are a Christ Centered, Caring Church Family." />
+
+  <section class="band band-tight" id="expect" aria-labelledby="expect-heading">
+    <div class="band-inner">
+      <h2 id="expect-heading" class="block-title">What to expect</h2>
+      <dl class="expect-list">
+        <div>
+          <dt>How long</dt>
+          <dd>
+            Sunday morning on the site runs 9:00 AM to 11:00 AM. Bible study is at 9:00. Worship is at 10:00.
+          </dd>
+        </div>
+        <div>
+          <dt>Music</dt>
+          <dd>
+            Family Praise and Worship is in the main sanctuary. The site does not describe the style beyond that.
+          </dd>
+        </div>
+        <div>
+          <dt>Dress</dt>
+          <dd>
+            A dress code is not published. Come ready for Bible study and worship with the church family.
+          </dd>
+        </div>
+        <div>
+          <dt>Parking</dt>
+          <dd>
+            The campus map shows parking along FM 535 beside the worship building. That building holds the sanctuary, Bible study, and the church office. The fellowship hall is the separate building to the west.
+          </dd>
+        </div>
+        <div>
+          <dt>Which door</dt>
+          <dd>
+            The campus map does not mark a visitor door. Tell us you are coming, and someone can meet you by name.
+          </dd>
+        </div>
+      </dl>
+      <TodoNote title="TODO — confirm before publishing">
+        <p>Music style, a dress code, and which door guests should use are not on the current church site or the campus map.</p>
+      </TodoNote>
+    </div>
+  </section>
+
+  <section class="band band-tight" id="kids" aria-labelledby="kids-heading">
+    <div class="band-inner">
+      <h2 id="kids-heading" class="block-title">Kids</h2>
+      <div class="family-grid">
+        <article class="info-card">
+          <h3>Check-in</h3>
+          <p>
+            Check in your children for their Bible Study Classes at 9:00 AM, and find one of the adult Bible study classes.
+          </p>
+        </article>
+        <article class="info-card">
+          <h3>During worship</h3>
+          <p>
+            Family Praise and Worship takes place in the main sanctuary, and then the children’s church proceeds to their classes. Nursery available.
+          </p>
+        </article>
+        <article class="info-card">
+          <h3>Ages and safety</h3>
+          <p>
+            Age groups and the safety steps at check-in are not listed on the church site. Name your children on the visit form, and ask when you arrive.
+          </p>
+        </article>
+      </div>
+      <TodoNote title="TODO — confirm before publishing">
+        <p>
+          The site says to check children in for Bible study, that children’s church follows family praise, and that a nursery is available. It does not publish age groups or a check-in safety process.
+        </p>
+      </TodoNote>
+    </div>
+  </section>
+
+  <section class="band band-tight" id="plan-a-visit" aria-labelledby="plan-heading">
+    <div class="band-inner contact-grid">
+      <div class="panel">
+        <h2 id="plan-heading" class="panel-title">Tell us you are coming</h2>
+        <p class="times-note">
+          Send your name before Sunday so someone can greet you when you arrive.
+        </p>
+        <form id="visit-form" class="form-grid">
+          <div>
+            <label for="visit-name">Your name</label>
+            <input id="visit-name" name="name" required autocomplete="name" />
+          </div>
+          <div>
+            <label for="visit-email">Email</label>
+            <input id="visit-email" name="email" type="email" required autocomplete="email" />
+          </div>
+          <div>
+            <label for="visit-phone">Phone</label>
+            <input id="visit-phone" name="phone" type="tel" autocomplete="tel" />
+          </div>
+          <div>
+            <label for="visit-who">Who is coming</label>
+            <textarea id="visit-who" name="who" rows="3" required placeholder="Names of the people with you"></textarea>
+          </div>
+          <div>
+            <label for="visit-kids">Children</label>
+            <textarea id="visit-kids" name="kids" rows="3" placeholder="Names and ages, if you are bringing children"></textarea>
+          </div>
+          <div>
+            <label for="visit-sunday">Sunday you plan to visit</label>
+            <input id="visit-sunday" name="sunday" type="date" required />
+          </div>
+          <button type="submit" class="btn">Send my name</button>
+          <p id="visit-note" class="times-note" hidden>
+            Your email app should open with this note to {site.email}, so someone can greet you by name.
+          </p>
+        </form>
+      </div>
+      <TodoNote title="TODO — confirm before publishing">
+        <p>
+          This form opens an email to {site.email}. It does not store the visit on the website. Connect a form service if the church should receive it without an email app.
+        </p>
+      </TodoNote>
+    </div>
+  </section>
+
+  <section class="band band-tight" id="welcome" aria-labelledby="welcome-heading">
+    <div class="band-inner panel">
+      <h2 id="welcome-heading" class="panel-title">A welcome from the pastor</h2>
+      <p class="times-note">
+        A 60 to 90 second welcome video is not published yet. Dr. Mark Redd, interim pastor, preaches on Bible and Life. Those messages are full sermons, not a short hello.
+      </p>
+      <p class="panel-action">
+        <a class="btn" href={site.podcastShow} target="_blank" rel="noopener noreferrer">Bible and Life</a>
+      </p>
+      <TodoNote title="TODO — confirm before publishing">
+        <p>
+          Add a 60 to 90 second welcome video from the pastor here when the church has a file or a link. Do not substitute a full sermon for that short welcome.
+        </p>
+      </TodoNote>
+    </div>
+  </section>
 
   <section class="band band-tight" aria-label="Service times and campus">
     <div class="band-inner">
@@ -180,3 +316,27 @@ const journey = [
     </div>
   </section>
 </Base>
+
+<script define:vars={{ email: site.email }}>
+  const form = document.getElementById("visit-form");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const subject = `Visit from ${data.get("name") || "a guest"}`;
+    const body = [
+      `Name: ${data.get("name") || ""}`,
+      `Email: ${data.get("email") || ""}`,
+      `Phone: ${data.get("phone") || ""}`,
+      `Sunday: ${data.get("sunday") || ""}`,
+      "",
+      "Who is coming:",
+      String(data.get("who") || ""),
+      "",
+      "Children:",
+      String(data.get("kids") || ""),
+    ].join("\n");
+    const note = document.getElementById("visit-note");
+    if (note) note.hidden = false;
+    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+</script>

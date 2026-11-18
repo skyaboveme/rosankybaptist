@@ -784,6 +784,34 @@ a {
   margin-top: 1rem;
 }
 
+.expect-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0 0 1rem;
+}
+
+.expect-list div {
+  background: white;
+  border-radius: 1.2rem;
+  padding: 1.15rem 1.25rem;
+  box-shadow: 0 10px 30px rgba(28, 22, 18, 0.06);
+}
+
+.expect-list dt {
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-cross-blue);
+}
+
+.expect-list dd {
+  margin: 0.45rem 0 0;
+  color: var(--color-ink-soft);
+  line-height: 1.55;
+}
+
 .form-grid label {
   display: block;
   font-size: 0.92rem;
@@ -993,6 +1021,7 @@ a {
   .campus-grid,
   .connect-grid,
   .family-grid,
+  .expect-list,
   .contact-grid,
   .feature,
   .footer-inner,

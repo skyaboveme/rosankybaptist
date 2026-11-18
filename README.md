@@ -51,7 +51,8 @@ Set the production site URL in `astro.config.mjs` (`site`) if the domain changes
 
 ## TODO — not on the current site
 
-- Pastor and staff names are not published.
+- Pastor and staff names are not on the old Squarespace pages. Bible and Life names Dr. Mark Redd as interim pastor.
+- Visit details still unpublished: music style, dress, which door, kids’ age groups, check-in safety steps, and a 60 to 90 second pastor welcome video. The visit form emails hello@rosankybc.org.
 - There is no sermon or media archive.
 - The church Facebook page is https://www.facebook.com/RosankyBaptistChurch. Header icons on the old site for Instagram and X point at Squarespace’s own accounts, so those are omitted.
 - Two phone numbers appear: `(512) 360-3968` in the footer and tap-to-call link, and `(512) 360-3109` in the site’s business settings.
