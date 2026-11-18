@@ -33,6 +33,7 @@ const family = [
 const steps = [
   { href: "/visit", title: "I'm new here" },
   { href: "/pray-for-me", title: "Pray for me" },
+  { href: site.podcastShow, title: "Bible and Life", external: true },
   { href: "/give", title: "I want to give" },
   { href: "/calendar", title: "See the calendar" },
   { href: "/trumpet", title: "Read Trumpet News" },
@@ -43,10 +44,10 @@ const steps = [
 <Base title="Rosanky Baptist Church | Join Our Faith Community Today">
   <section class="campus-hero">
     <img
-      src="/images/worship.png"
+      src="/images/home-hero.png"
       alt="People kneeling in prayer on the sanctuary steps during worship at Rosanky Baptist Church."
-      width="1500"
-      height="1000"
+      width="2400"
+      height="1792"
     />
     <div class="hero-copy">
       <h1>Rosanky</h1>
@@ -142,6 +143,25 @@ const steps = [
           ))
         }
       </ul>
+    </div>
+  </section>
+
+  <section class="band band-tight" aria-labelledby="bible-and-life-heading">
+    <div class="band-inner panel">
+      <h2 id="bible-and-life-heading" class="panel-title">Bible and Life</h2>
+      <p class="times-note">
+        Biblical preaching and practical teaching from Dr. Mark Redd, interim pastor of Rosanky Baptist Church.
+      </p>
+      <iframe
+        class="spotify-embed"
+        title="Bible and Life with Dr. Mark Redd on Spotify"
+        src={site.podcastShowEmbed}
+        loading="lazy"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      ></iframe>
+      <p class="panel-action">
+        <a class="btn" href={site.podcastShow} target="_blank" rel="noopener noreferrer">Listen on Spotify</a>
+      </p>
     </div>
   </section>
 

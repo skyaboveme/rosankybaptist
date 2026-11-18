@@ -4,39 +4,48 @@ import { ClientRouter } from "astro:transitions";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { site } from "../data/site";
-import { pageGraph } from "../lib/schema";
+import { pageGraph, shareImage } from "../lib/schema";
 
 interface Props {
   title: string;
   description?: string;
   image?: string;
+  imageAlt?: string;
   pageType?: "WebPage" | "AboutPage" | "ContactPage" | "CollectionPage" | "BlogPosting";
   published?: Date;
   leaf?: string;
+  noindex?: boolean;
 }
 
 const {
   title,
   description = site.description,
-  image = "/images/worship.png",
+  image = shareImage.path,
+  imageAlt,
   pageType = "WebPage",
   published,
   leaf,
+  noindex = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const ogImage = new URL(image, site.url).href;
 const fullTitle = title.includes(site.name) ? title : `${title} — ${site.name}`;
-const jsonLd = pageGraph({
-  canonical,
-  title: fullTitle,
-  description,
-  image: ogImage,
-  pathname: Astro.url.pathname,
-  pageType,
-  published: published?.toISOString(),
-  leaf,
-});
+const usesShareImage = image === shareImage.path;
+const alt = imageAlt ?? (usesShareImage ? shareImage.alt : fullTitle);
+const ogType = pageType === "BlogPosting" ? "article" : "website";
+const jsonLd = JSON.stringify(
+  pageGraph({
+    canonical,
+    title: fullTitle,
+    description,
+    image: ogImage,
+    pathname: Astro.url.pathname,
+    pageType,
+    published: published?.toISOString(),
+    leaf,
+  }),
+).replace(/</g, "\\u003c");
 ---
 
 <!doctype html>
@@ -46,21 +55,30 @@ const jsonLd = pageGraph({
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.ico" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:type" content={pageType === "BlogPosting" ? "article" : "website"} />
+    <meta property="og:type" content={ogType} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:secure_url" content={ogImage} />
+    <meta property="og:image:alt" content={alt} />
+    {usesShareImage && <meta property="og:image:type" content={shareImage.type} />}
+    {usesShareImage && <meta property="og:image:width" content={String(shareImage.width)} />}
+    {usesShareImage && <meta property="og:image:height" content={String(shareImage.height)} />}
     {published && <meta property="article:published_time" content={published.toISOString()} />}
+    {ogType === "article" && <meta property="article:publisher" content={site.facebook} />}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={alt} />
     <ClientRouter />
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script type="application/ld+json" set:html={jsonLd} />
   </head>
   <body>
     <Header />

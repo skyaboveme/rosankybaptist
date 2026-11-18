@@ -16,7 +16,11 @@ const { category } = Astro.props;
 const posts = (await allPosts()).filter((post) => post.data.categories.includes(category));
 ---
 
-<Base title={`${category} — Trumpet News`} description={`Trumpet News posts in the ${category} category.`}>
+<Base
+  title={`${category} — Trumpet News`}
+  description={`Trumpet News posts in the ${category} category.`}
+  pageType="CollectionPage"
+>
   <PageHero eyebrow="Trumpet News" title={category} lede="Posts filed in this category on the current church site." />
   <div class="mx-auto max-w-3xl px-4 py-12 md:px-6">
     <ul class="space-y-6">
