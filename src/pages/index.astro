@@ -33,7 +33,7 @@ const family = [
 const steps = [
   { href: "/visit", title: "I'm new here" },
   { href: "/pray-for-me", title: "Pray for me" },
-  { href: site.prayerEpisode, title: "How to pray for your church", external: true },
+  { href: site.podcastShow, title: "Bible and Life", external: true },
   { href: "/give", title: "I want to give" },
   { href: "/calendar", title: "See the calendar" },
   { href: "/trumpet", title: "Read Trumpet News" },
@@ -143,6 +143,25 @@ const steps = [
           ))
         }
       </ul>
+    </div>
+  </section>
+
+  <section class="band band-tight" aria-labelledby="bible-and-life-heading">
+    <div class="band-inner panel">
+      <h2 id="bible-and-life-heading" class="panel-title">Bible and Life</h2>
+      <p class="times-note">
+        Biblical preaching and practical teaching from Dr. Mark Redd, interim pastor of Rosanky Baptist Church.
+      </p>
+      <iframe
+        class="spotify-embed"
+        title="Bible and Life with Dr. Mark Redd on Spotify"
+        src={site.podcastShowEmbed}
+        loading="lazy"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      ></iframe>
+      <p class="panel-action">
+        <a class="btn" href={site.podcastShow} target="_blank" rel="noopener noreferrer">Listen on Spotify</a>
+      </p>
     </div>
   </section>
 

@@ -102,6 +102,7 @@ export function pageGraph(options: {
   const isCollection = options.pageType === "CollectionPage";
   const isGive = pathname === "/give";
   const isPray = pathname === "/pray-for-me";
+  const podcastId = `${site.url}/#bible-and-life`;
   const prayerEpisodeId = `${site.url}/#how-to-pray-for-your-church`;
   const usesShareImage = options.image === new URL(shareImage.path, site.url).href;
   const imageId = usesShareImage ? shareImageId : `${options.canonical}#image`;
@@ -171,6 +172,7 @@ export function pageGraph(options: {
       logo: { "@id": logoId },
       image: { "@id": shareImageId },
       sameAs: [site.facebook],
+      subjectOf: { "@id": podcastId },
       address: [{ "@id": addressId }, { "@id": mailingId }],
       location: { "@id": placeId },
       contactPoint: { "@id": contactId },
@@ -200,6 +202,23 @@ export function pageGraph(options: {
           "@type": "State",
           name: "Texas",
         },
+      },
+    },
+    {
+      "@type": "PodcastSeries",
+      "@id": podcastId,
+      name: "Bible and Life with Dr. Mark Redd",
+      url: site.podcastShow,
+      description:
+        "Biblical preaching and practical teaching from Dr. Mark Redd, interim pastor of Rosanky Baptist Church.",
+      inLanguage: "en-US",
+      about: { "@id": organizationId },
+      sourceOrganization: { "@id": organizationId },
+      author: {
+        "@type": "Person",
+        name: "Dr. Mark Redd",
+        jobTitle: "Interim Pastor",
+        worksFor: { "@id": organizationId },
       },
     },
     sundayEvent(
@@ -265,10 +284,7 @@ export function pageGraph(options: {
       description: "Seven ways to pray for your church, from Ephesians 3:14–21.",
       url: site.prayerEpisode,
       duration: "PT41M26S",
-      partOfSeries: {
-        "@type": "PodcastSeries",
-        name: "Bible and Life with Dr. Mark Redd",
-      },
+      partOfSeries: { "@id": podcastId },
     });
   }
 
