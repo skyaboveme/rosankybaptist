@@ -228,9 +228,13 @@ const steps = [
       effectiveType?: string;
     }
 
-    const heroSources: ReadonlyArray<readonly [string, string]> = [
+    const desktopHeroSources: ReadonlyArray<readonly [string, string]> = [
       ["/video/hero.webm", "video/webm"],
       ["/video/hero.mp4", "video/mp4"],
+    ];
+
+    const mobileHeroSources: ReadonlyArray<readonly [string, string]> = [
+      ["/video/hero-mobile.mp4", "video/mp4"],
     ];
 
     function networkSkipsHeroVideo(): boolean {
@@ -240,12 +244,34 @@ const steps = [
       return connection.effectiveType === "slow-2g" || connection.effectiveType === "2g";
     }
 
+    function usesMobileHero(): boolean {
+      return window.matchMedia("(max-width: 640px), (max-height: 480px)").matches;
+    }
+
     function shouldSkipHeroVideo(): boolean {
       return (
         window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-        window.matchMedia("(max-width: 640px), (max-height: 480px)").matches ||
         networkSkipsHeroVideo()
       );
+    }
+
+    function enableInlineMutedPlayback(video: HTMLVideoElement): void {
+      video.defaultMuted = true;
+      video.muted = true;
+      video.playsInline = true;
+      video.setAttribute("muted", "");
+      video.setAttribute("playsinline", "");
+      video.setAttribute("webkit-playsinline", "");
+    }
+
+    function startHeroPlayback(video: HTMLVideoElement): void {
+      enableInlineMutedPlayback(video);
+      const playAttempt = video.play();
+      if (playAttempt) {
+        playAttempt.catch(() => {
+          video.classList.remove("is-playing");
+        });
+      }
     }
 
     function attachHeroVideo(): void {
@@ -254,32 +280,24 @@ const steps = [
       if (shouldSkipHeroVideo()) return;
 
       video.dataset.sourcesAttached = "true";
-      video.muted = true;
-      video.playsInline = true;
+      enableInlineMutedPlayback(video);
 
-      for (const [src, type] of heroSources) {
+      const sources = usesMobileHero() ? mobileHeroSources : desktopHeroSources;
+      for (const [src, type] of sources) {
         const source = document.createElement("source");
         source.src = src;
         source.type = type;
         video.append(source);
       }
 
-      const reveal = () => {
-        video.classList.add("is-playing");
-      };
-      video.addEventListener("playing", reveal, { once: true });
       video.addEventListener(
-        "canplay",
+        "playing",
         () => {
-          const playAttempt = video.play();
-          if (playAttempt) {
-            playAttempt.catch(() => {
-              video.classList.remove("is-playing");
-            });
-          }
+          video.classList.add("is-playing");
         },
         { once: true },
       );
+      video.addEventListener("canplay", () => startHeroPlayback(video), { once: true });
 
       video.preload = "auto";
       video.load();
