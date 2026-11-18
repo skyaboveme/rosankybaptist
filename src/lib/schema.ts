@@ -101,6 +101,8 @@ export function pageGraph(options: {
   const onTrumpet = pathname === "/trumpet" || pathname.startsWith("/trumpet/");
   const isCollection = options.pageType === "CollectionPage";
   const isGive = pathname === "/give";
+  const isPray = pathname === "/pray-for-me";
+  const prayerEpisodeId = `${site.url}/#how-to-pray-for-your-church`;
   const usesShareImage = options.image === new URL(shareImage.path, site.url).href;
   const imageId = usesShareImage ? shareImageId : `${options.canonical}#image`;
 
@@ -240,6 +242,7 @@ export function pageGraph(options: {
             : pathname === "/"
             ? { "@id": organizationId }
             : { "@id": placeId },
+      mentions: isPray ? { "@id": prayerEpisodeId } : undefined,
       potentialAction: isGive
         ? {
             "@type": "DonateAction",
@@ -253,6 +256,21 @@ export function pageGraph(options: {
         : undefined,
     },
   ];
+
+  if (isPray) {
+    graph.push({
+      "@type": "PodcastEpisode",
+      "@id": prayerEpisodeId,
+      name: "How To Pray for Your Church",
+      description: "Seven ways to pray for your church, from Ephesians 3:14–21.",
+      url: site.prayerEpisode,
+      duration: "PT41M26S",
+      partOfSeries: {
+        "@type": "PodcastSeries",
+        name: "Bible and Life with Dr. Mark Redd",
+      },
+    });
+  }
 
   if (!usesShareImage) {
     graph.splice(1, 0, {

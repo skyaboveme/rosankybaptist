@@ -20,6 +20,8 @@ export const site = {
   sundayHours: { opens: "09:00", closes: "11:00" },
   churchCenter: "https://rosankybc.churchcenter.com/",
   facebook: "https://www.facebook.com/RosankyBaptistChurch",
+  prayerEpisode: "https://open.spotify.com/episode/3DKAnONzJkRkqwgVg01agM",
+  prayerEpisodeEmbed: "https://open.spotify.com/embed/episode/3DKAnONzJkRkqwgVg01agM",
   prayerForm: "https://rosankybc.churchcenter.com/people/forms/1071699",
   giveOnline: "https://secure.myvanco.com/L-ZB3N/home",
   pinewoodForm:
