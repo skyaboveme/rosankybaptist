@@ -44,11 +44,22 @@ const steps = [
 <Base title="Rosanky Baptist Church | Join Our Faith Community Today">
   <section class="campus-hero">
     <img
-      src="/images/home-hero.png"
-      alt="People kneeling in prayer on the sanctuary steps during worship at Rosanky Baptist Church."
-      width="2400"
-      height="1792"
+      src="/video/hero-poster.jpg"
+      alt="Aerial view of the Rosanky Baptist Church building and steeple."
+      width="1280"
+      height="720"
+      fetchpriority="high"
     />
+    <video
+      class="hero-video"
+      muted
+      autoplay
+      loop
+      playsinline
+      preload="none"
+      aria-hidden="true"
+      data-hero-video
+    ></video>
     <div class="hero-copy">
       <h1>Rosanky</h1>
       <p class="hero-tagline">{site.tagline}</p>
@@ -211,4 +222,83 @@ const steps = [
       </div>
     </div>
   </section>
+  <script>
+    interface HeroNetworkInformation {
+      saveData?: boolean;
+      effectiveType?: string;
+    }
+
+    const heroSources: ReadonlyArray<readonly [string, string]> = [
+      ["/video/hero.webm", "video/webm"],
+      ["/video/hero.mp4", "video/mp4"],
+    ];
+
+    function networkSkipsHeroVideo(): boolean {
+      const connection = (navigator as Navigator & { connection?: HeroNetworkInformation }).connection;
+      if (!connection) return false;
+      if (connection.saveData) return true;
+      return connection.effectiveType === "slow-2g" || connection.effectiveType === "2g";
+    }
+
+    function shouldSkipHeroVideo(): boolean {
+      return (
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+        window.matchMedia("(max-width: 640px), (max-height: 480px)").matches ||
+        networkSkipsHeroVideo()
+      );
+    }
+
+    function attachHeroVideo(): void {
+      const video = document.querySelector<HTMLVideoElement>("[data-hero-video]");
+      if (!video || video.dataset.sourcesAttached === "true") return;
+      if (shouldSkipHeroVideo()) return;
+
+      video.dataset.sourcesAttached = "true";
+      video.muted = true;
+      video.playsInline = true;
+
+      for (const [src, type] of heroSources) {
+        const source = document.createElement("source");
+        source.src = src;
+        source.type = type;
+        video.append(source);
+      }
+
+      const reveal = () => {
+        video.classList.add("is-playing");
+      };
+      video.addEventListener("playing", reveal, { once: true });
+      video.addEventListener(
+        "canplay",
+        () => {
+          const playAttempt = video.play();
+          if (playAttempt) {
+            playAttempt.catch(() => {
+              video.classList.remove("is-playing");
+            });
+          }
+        },
+        { once: true },
+      );
+
+      video.preload = "auto";
+      video.load();
+    }
+
+    function scheduleHeroVideo(): void {
+      const start = () => {
+        if ("requestIdleCallback" in window) {
+          requestIdleCallback(() => attachHeroVideo(), { timeout: 2000 });
+        } else {
+          window.setTimeout(attachHeroVideo, 200);
+        }
+      };
+
+      if (document.readyState === "complete") start();
+      else window.addEventListener("load", start, { once: true });
+    }
+
+    scheduleHeroVideo();
+    document.addEventListener("astro:page-load", scheduleHeroVideo);
+  </script>
 </Base>

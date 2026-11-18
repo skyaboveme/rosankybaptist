@@ -166,13 +166,24 @@ a {
   background: #241c16;
 }
 
-.campus-hero img {
+.campus-hero img,
+.campus-hero video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  max-width: none;
   object-fit: cover;
-  object-position: center 42%;
+  object-position: center 68%;
+}
+
+.campus-hero video {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.campus-hero video.is-playing {
+  opacity: 1;
 }
 
 .campus-hero::after {
@@ -1053,6 +1064,10 @@ a {
   .step-list a,
   .path-list a {
     transition: background 0.2s ease, transform 0.35s ease;
+  }
+
+  .campus-hero video {
+    transition: opacity 0.45s ease;
   }
 
   .overlay-card:hover img,
