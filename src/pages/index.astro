@@ -33,7 +33,7 @@ const family = [
 const steps = [
   { href: "/visit", title: "I'm new here" },
   { href: "/pray-for-me", title: "Pray for me" },
-  { href: site.podcastShow, title: "Bible and Life", external: true },
+  { href: "/#bible-and-life", title: "Bible and Life" },
   { href: "/give", title: "I want to give" },
   { href: "/calendar", title: "See the calendar" },
   { href: "/trumpet", title: "Read Trumpet News" },
@@ -146,21 +146,22 @@ const steps = [
     </div>
   </section>
 
-  <section class="band band-tight" aria-labelledby="bible-and-life-heading">
+  <section class="band band-tight" id="bible-and-life" aria-labelledby="bible-and-life-heading">
     <div class="band-inner panel">
       <h2 id="bible-and-life-heading" class="panel-title">Bible and Life</h2>
       <p class="times-note">
-        Biblical preaching and practical teaching from Dr. Mark Redd, interim pastor of Rosanky Baptist Church.
+        Play a message here. Biblical preaching and practical teaching from Dr. Mark Redd, interim pastor of Rosanky Baptist Church.
       </p>
       <iframe
-        class="spotify-embed"
-        title="Bible and Life with Dr. Mark Redd on Spotify"
+        class="spotify-embed spotify-show"
+        title="Bible and Life with Dr. Mark Redd. Press play to listen on this page."
         src={site.podcastShowEmbed}
         loading="lazy"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        allowfullscreen
       ></iframe>
       <p class="panel-action">
-        <a class="btn" href={site.podcastShow} target="_blank" rel="noopener noreferrer">Listen on Spotify</a>
+        <a href={site.podcastShow} target="_blank" rel="noopener noreferrer">Open in Spotify</a>
       </p>
     </div>
   </section>

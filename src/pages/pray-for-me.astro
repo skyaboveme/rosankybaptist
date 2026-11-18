@@ -53,16 +53,15 @@ import { site } from "../data/site";
       </p>
       <iframe
         class="spotify-embed"
-        title="How To Pray for Your Church, from Bible and Life with Dr. Mark Redd"
+        title="How To Pray for Your Church. Press play to listen on this page."
         src={site.prayerEpisodeEmbed}
         loading="lazy"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        allowfullscreen
       ></iframe>
-      <p class="panel-action">
-        <a class="btn" href={site.prayerEpisode} target="_blank" rel="noopener noreferrer">Listen on Spotify</a>
-      </p>
       <p class="times-note">
-        More messages from Dr. Mark Redd are on <a href={site.podcastShow} target="_blank" rel="noopener noreferrer">Bible and Life</a>.
+        Press play to hear this message here. More messages play on <a href="/#bible-and-life">Bible and Life</a>.
+        <a href={site.prayerEpisode} target="_blank" rel="noopener noreferrer">Open this episode in Spotify</a>
       </p>
     </div>
     <TodoNote title="TODO">

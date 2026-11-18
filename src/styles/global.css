@@ -860,6 +860,15 @@ a {
   margin-top: 1rem;
   border: 0;
   border-radius: 0.8rem;
+  background: #1c1612;
+}
+
+.spotify-show {
+  height: 352px;
+}
+
+#bible-and-life {
+  scroll-margin-top: 6rem;
 }
 
 .site-footer {
